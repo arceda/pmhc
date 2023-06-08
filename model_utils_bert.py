@@ -231,6 +231,8 @@ class BertRnn(BertPreTrainedModel):
         self.rnn_dropout = config.rnn_dropout
         self.rnn_hidden = config.rnn_hidden
         self.max_seq_len = config.length
+
+        self.bert = BertModel(config)
         
         self.rnn = nn.LSTM(input_size=self.hidden_size, hidden_size=self.rnn_hidden, bidirectional=True,
                                num_layers=self.num_rnn_layer, batch_first=True, dropout=self.rnn_dropout)
