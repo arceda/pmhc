@@ -11,7 +11,6 @@ import torch
 class CSVDataset(Dataset):
     def __init__(self,
                  data_file: Union[str, Path, pd.DataFrame],
-                 max_pep_len=30,
                  train: bool = True):
         if isinstance(data_file, pd.DataFrame):
             data = data_file
@@ -21,19 +20,12 @@ class CSVDataset(Dataset):
         mhc = data['mhc']
         self.mhc = mhc.values
         peptide = data['peptide']
-        # peptide = peptide.apply(lambda x: x[:max_pep_len]) # no vamos a cortar el peptido
-        self.peptide = peptide.values
-        if not train:
-            data['label'] = np.nan
-            data['masslabel'] = np.nan
-        if 'masslabel' not in data and 'label' not in data:
-            raise ValueError("missing label.")
-        if 'masslabel' not in data:
-            data['masslabel'] = np.nan
-        if 'label' not in data:
-            data['label'] = np.nan
+        
+        self.peptide = peptide.values   
         #self.targets = np.stack([data['label'], data['masslabel']], axis=1)
-        self.targets =  data['masslabel']
+        #self.targets =  data['masslabel']
+        self.targets =  data['Label']
+        
         self.data = data
         if 'instance_weights' in data:
             self.instance_weights = data['instance_weights'].values
@@ -61,7 +53,6 @@ class DataSetLoaderTAPE(Dataset):
     def __init__(self,
                  input_file,
                  tokenizer: Union[str, TAPETokenizer] = 'iupac',
-                 max_pep_len=30,
                  max_length = 73,
                  in_memory: bool = False,
                  instance_weight: bool = False,
@@ -69,9 +60,7 @@ class DataSetLoaderTAPE(Dataset):
         if isinstance(tokenizer, str):
             tokenizer = TAPETokenizer(vocab=tokenizer)
         self.tokenizer = tokenizer
-        self.data = CSVDataset(input_file,
-                               max_pep_len=max_pep_len,
-                               train=train)
+        self.data = CSVDataset(input_file, train=train)
         self.instance_weight = instance_weight
         self.max_length = max_length
 

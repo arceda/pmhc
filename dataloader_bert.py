@@ -34,8 +34,8 @@ class DataSetLoaderBERT(Dataset):
     def get_label(self,file):
         data = pd.read_csv(file)
         label = []
-        #label.append(data['Label'].values)
-        label.append(data['masslabel'].values) # netMHCpan3.2 database
+        label.append(data['Label'].values)
+        #label.append(data['masslabel'].values) # netMHCpan3.2 database
         return label
 
     def load_dataset(self,data_path):

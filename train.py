@@ -1,6 +1,6 @@
 from transformers import Trainer, TrainingArguments, BertConfig, AdamW
 from model_utils_bert import BertLinear, BertRnn, BertRnnAtt
-from model_utils_tape import TapeLinear
+from model_utils_tape import TapeLinear, TapeRnn, TapeRnnAtt
 from transformers import EarlyStoppingCallback, IntervalStrategy
 from sklearn.metrics import accuracy_score, confusion_matrix, matthews_corrcoef, roc_auc_score
 from tape import ProteinBertConfig
@@ -10,6 +10,9 @@ from transformers import get_scheduler
 # data loaders
 from dataloader_bert import DataSetLoaderBERT
 from dataloader_tape import DataSetLoaderTAPE
+
+from transformers import set_seed
+set_seed(42)
 
 import sys
 
@@ -38,8 +41,11 @@ def compute_metrics(pred):
     }
 
 
-path_train_csv = "../dataset/netMHCIIpan3.2/train_mini.csv"
-path_val_csv = "../dataset/netMHCIIpan3.2/eval_mini.csv"
+path_train_csv = "dataset/hlab/hlab_train.csv"
+path_val_csv = "dataset/hlab/hlab_val.csv"
+
+#path_train_csv = "dataset/netMHCIIpan3.2/train_micro.csv"
+#path_val_csv = "dataset/netMHCIIpan3.2/eval_micro.csv"
 
 #################################################################################
 #################################################################################
@@ -48,21 +54,25 @@ model_type = "tape"
 #model_type = "bert" # EM1, ESM2, PortBert
 
 # especificar donde se guadra los modlos y resultados
-path_results    = "results/train_100/" 
-path_model      = "models/train_100/"
+path_results    = "results/train_0/" 
+path_model      = "models/train_0/"
 
 # el modelo preentrenado
 model_name = "bert-base"   # TAPE                   # train 1, 2, 3, 4
-#model_name = "../models/esm2_t6_8M_UR50D"          # train 1, 2, 3, 4
-#model_name = "../models/esm2_t33_650M_UR50D"       # 
-model_name = "../models/esm2_t30_150M_UR50D"
+#model_name = "pre_trained_models/esm2_t6_8M_UR50D"          # train 1, 2, 3, 4
+#model_name = "pre_trained_models/esm2_t12_35M_UR50D" 
+#model_name = "pre_trained_models/esm2_t33_650M_UR50D"       # 
+#model_name = "pre_trained_models/esm2_t30_150M_UR50D"
 #################################################################################
 #################################################################################
 
+max_length = 50 # for hlab dataset
+#max_length = 73 # for netpanmhcii3.2 dataset
+
 if model_type == "tape":
     # read with TAPE tokenizer, la longitus del mhc es 34 => 34 + 37 + 2= 73    
-    trainset = DataSetLoaderTAPE(path_train_csv, max_pep_len=37, max_length=73) # el paper usa max_peptide_lenght = 24
-    valset = DataSetLoaderTAPE(path_val_csv, max_pep_len=37, max_length=73)
+    trainset = DataSetLoaderTAPE(path_train_csv, max_length=73) # el paper usa max_peptide_lenght = 24
+    valset = DataSetLoaderTAPE(path_val_csv, max_length=73)
     config = ProteinBertConfig.from_pretrained(model_name, num_labels=2)
     
 else:
@@ -75,13 +85,16 @@ config.rnn = "lstm"
 config.num_rnn_layer = 2
 config.rnn_dropout = 0.1
 config.rnn_hidden = 768
-config.length = 51
+config.length = max_length
 config.cnn_filters = 512
 config.cnn_dropout = 0.1
 
 #################################################################################
 #################################################################################
-model_ = TapeLinear.from_pretrained(model_name, config=config)
+#model_ = TapeLinear.from_pretrained(model_name, config=config)
+#model_ = TapeRnn.from_pretrained(model_name, config=config)
+model_ = TapeRnnAtt.from_pretrained(model_name, config=config)
+#model_ = BertLinear.from_pretrained(model_name, config=config)
 
 #################################################################################
 #################################################################################
@@ -138,7 +151,7 @@ trainer = Trainer(
         train_dataset   = trainset,  
         eval_dataset    = valset, 
         compute_metrics = compute_metrics,  
-        optimizers = (optimizers, lr_scheduler),        
+        optimizers      = (optimizer, lr_scheduler),        
         callbacks       = [EarlyStoppingCallback(early_stopping_patience=5)] 
     )
 

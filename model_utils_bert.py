@@ -80,7 +80,11 @@ class BertLinear(BertPreTrainedModel):
             return_dict=return_dict,
         )
 
+        sequence_output = outputs[0]
         pooled_output = outputs[1]
+
+        #print("Sequence output" ,sequence_output.shape)
+        #print("Pooled output:" , pooled_output.shape)
 
         pooled_output = self.dropout(pooled_output)
         logits = self.classifier(pooled_output)
@@ -185,8 +189,8 @@ class BertRnnAtt(BertPreTrainedModel):
         )
 
         # lstm        
-        pooled_output = bert_out[0]
-        rnn_out, (ht, ct) = self.rnn(pooled_output)        
+        sequence_output = bert_out[0]
+        rnn_out, (ht, ct) = self.rnn(sequence_output)        
 
         query = self.att_dropout(rnn_out)
         attn_output, attention = self.attention_net(rnn_out, query)  
@@ -227,18 +231,10 @@ class BertRnn(BertPreTrainedModel):
         self.rnn_dropout = config.rnn_dropout
         self.rnn_hidden = config.rnn_hidden
         self.max_seq_len = config.length
-
-
-        self.bert = BertModel(config)
-        if self.rnn_type == "lstm":
-            self.rnn = nn.LSTM(input_size=self.hidden_size, hidden_size=self.rnn_hidden, bidirectional=True,
+        
+        self.rnn = nn.LSTM(input_size=self.hidden_size, hidden_size=self.rnn_hidden, bidirectional=True,
                                num_layers=self.num_rnn_layer, batch_first=True, dropout=self.rnn_dropout)
-        elif self.rnn_type == "gru":
-            self.rnn = nn.GRU(input_size=self.hidden_size, hidden_size=self.rnn_hidden, bidirectional=True,
-                              num_layers=self.num_rnn_layer, batch_first=True, dropout=self.rnn_dropout)
-        else:
-            raise ValueError
-
+        
         self.dropout = nn.Dropout(self.rnn_dropout)
         self.classifier = nn.Linear(2*self.rnn_hidden, self.config.num_labels)
 
@@ -279,14 +275,8 @@ class BertRnn(BertPreTrainedModel):
             return_dict=return_dict,
         )
         # lstm
-        if self.rnn_type == "lstm":
-            pooled_output = bert_out[0]
-            rnn_out, (ht, ct) = self.rnn(pooled_output)
-        elif self.rnn_type == "gru":
-            pooled_output = bert_out[0]
-            rnn_out, ht = self.rnn(pooled_output)
-        else:
-            raise ValueError
+        sequence_output = bert_out[0]
+        rnn_out, (ht, ct) = self.rnn(sequence_output)        
 
         output = rnn_out.permute(0, 2, 1)
         output = torch.nn.functional.max_pool1d(output, self.max_seq_len)
