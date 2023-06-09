@@ -3,3 +3,5 @@ results/*
 __pycache__/*
 netMHCpan-4.1/*
 netMHCpan-4.1/data/*
+tmp_peptides.pep
+tmp_results.xls
