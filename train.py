@@ -54,8 +54,8 @@ model_type = "tape"
 #model_type = "bert" # EM1, ESM2, PortBert
 
 # especificar donde se guadra los modlos y resultados
-path_results    = "results/train_0/" 
-path_model      = "models/train_0/"
+path_results    = "results/train_tape_rnn/" 
+path_model      = "models/train_tape_rnn/"
 
 # el modelo preentrenado
 model_name = "bert-base"   # TAPE                   # train 1, 2, 3, 4
@@ -92,8 +92,8 @@ config.cnn_dropout = 0.1
 #################################################################################
 #################################################################################
 #model_ = TapeLinear.from_pretrained(model_name, config=config)
-#model_ = TapeRnn.from_pretrained(model_name, config=config)
-model_ = TapeRnnAtt.from_pretrained(model_name, config=config)
+model_ = TapeRnn.from_pretrained(model_name, config=config)
+#model_ = TapeRnnAtt.from_pretrained(model_name, config=config)
 #model_ = BertLinear.from_pretrained(model_name, config=config)
 
 #################################################################################
@@ -110,8 +110,8 @@ model_ = TapeRnnAtt.from_pretrained(model_name, config=config)
 ############ hyperparameters ####################################################
 
 num_samples = len(trainset)
-num_epochs = 10
-batch_size = 32
+num_epochs = 3
+batch_size = 16  # segun hlab, se obtienen mejoes resutlados
 num_training_steps = num_epochs * num_samples
 
 training_args = TrainingArguments(
@@ -130,20 +130,22 @@ training_args = TrainingArguments(
     )
 
 # hiperparameters BERTMHC, uso SGD with momentum, ademas uso escheduler
-lr = 0.15
+lr = 0.15  # con este learning rate, no converge y genera Nan
 weight_decay = 0.0001
 momentum = 0.9
+warmup_steps = 0
 
 # hiperparameters HLAB, uso AdamW (en teoria es mejor de SGD with momentum)
-#lr = 5e-5
+lr = 5e-5
 #weight_decay = 0.01
 betas = ((0.9, 0.999)) # defult
+warmup_steps = 1000
 
 # optimizer Adam Weigh Decay https://pytorch.org/docs/stable/generated/torch.optim.AdamW.html
 optimizer = AdamW(model_.parameters(), lr=lr, betas=betas, weight_decay=weight_decay)
 
 # scheduller
-lr_scheduler = get_scheduler("linear", optimizer=optimizer, num_warmup_steps=0, num_training_steps=num_training_steps)
+lr_scheduler = get_scheduler("linear", optimizer=optimizer, num_warmup_steps=warmup_steps, num_training_steps=num_training_steps)
 
 trainer = Trainer(        
         args            = training_args,   
@@ -157,4 +159,7 @@ trainer = Trainer(
 
 #trainer.train(resume_from_checkpoint = True)
 trainer.train()
-#trainer.save_model(path_model)
+trainer.save_model(path_model)
+
+
+#
