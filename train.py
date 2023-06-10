@@ -89,6 +89,9 @@ config.length = max_length
 config.cnn_filters = 512
 config.cnn_dropout = 0.1
 
+#print(config)
+#sys.exit()
+
 #################################################################################
 #################################################################################
 #model_ = TapeLinear.from_pretrained(model_name, config=config)
