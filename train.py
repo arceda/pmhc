@@ -71,14 +71,14 @@ max_length = 50 # for hlab dataset
 
 if model_type == "tape":
     # read with TAPE tokenizer, la longitus del mhc es 34 => 34 + 37 + 2= 73    
-    trainset = DataSetLoaderTAPE(path_train_csv, max_length=73) # el paper usa max_peptide_lenght = 24
-    valset = DataSetLoaderTAPE(path_val_csv, max_length=73)
+    trainset = DataSetLoaderTAPE(path_train_csv, max_length=max_length) # el paper usa max_peptide_lenght = 24
+    valset = DataSetLoaderTAPE(path_val_csv, max_length=max_length)
     config = ProteinBertConfig.from_pretrained(model_name, num_labels=2)
     
 else:
     # read with ESM tokenizer    
-    trainset = DataSetLoaderBERT(path=path_train_csv, tokenizer_name=model_name, max_length=73)
-    valset = DataSetLoaderBERT(path=path_val_csv, tokenizer_name=model_name, max_length=73)
+    trainset = DataSetLoaderBERT(path=path_train_csv, tokenizer_name=model_name, max_length=max_length)
+    valset = DataSetLoaderBERT(path=path_val_csv, tokenizer_name=model_name, max_length=max_length)
     config = BertConfig.from_pretrained(model_name, num_labels=2)
 
 config.rnn = "lstm"

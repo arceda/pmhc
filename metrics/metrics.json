@@ -1,0 +1,22 @@
+# tape_rnn:
+{'test_loss': 0.693148672580719, 'test_auc': 0.5, 'test_precision': 0.4989570054467493, 'test_recall': 1.0, 
+ 'test_f1': 0.6657389153040318, 'test_sn': 0.4989570054467493, 'test_sp': 0.0, 'test_accuracy': 0.4989570054467493, 
+ 'test_mcc': 0.0, 'test_runtime': 739.9707, 'test_samples_per_second': 233.225, 'test_steps_per_second': 29.154}
+# tape_rnn freeze:
+{'test_loss': 0.18280650675296783, 'test_auc': 0.9345493392049244, 'test_precision': 0.9282606704524639, 'test_recall': 0.9415631169434444, 
+ 'test_f1': 0.9348645750458334, 'test_sn': 0.9282606704524639, 'test_sp': 0.9275355614664045, 'test_accuracy': 0.9345347085409665, 
+ 'test_mcc': 0.8691616281324402, 'test_runtime': 738.5142, 'test_samples_per_second': 233.685, 'test_steps_per_second': 29.211}
+
+# esm2 t30 rnn freeze
+{'test_loss': 0.1935058832168579, 'test_auc': 0.9302870881826648, 'test_precision': 0.9184688043748447, 'test_recall': 0.9440250841946348, 'test_f1': 0.9310716085582078, 'test_sn': 0.9184688043748447, 'test_sp': 0.916549092170695, 'test_accuracy': 0.9302584308726388, 'test_mcc': 0.8608562206579472, 'test_runtime': 1040.576, 'test_samples_per_second': 165.85, 'test_steps_per_second': 20.732}
+# esm2 t30 rnn
+{'test_loss': 0.6931536197662354, 'test_auc': 0.5, 'test_precision': 0.4989570054467493, 'test_recall': 1.0, 'test_f1': 0.6657389153040318, 'test_sn': 0.4989570054467493, 'test_sp': 0.0, 'test_accuracy': 0.4989570054467493, 'test_mcc': 0.0, 'test_runtime': 1023.1607, 'test_samples_per_second': 168.673, 'test_steps_per_second': 21.085}
+
+# results/train_esm2_t33_rnn_freeze/checkpoint-101067
+{'test_loss': 0.5901898741722107, 'test_auc': 0.6816097413302891, 'test_precision': 0.7139173136539464, 'test_recall': 0.604412960167228, 'test_f1': 0.6546172615903203, 'test_sn': 0.7139173136539464, 'test_sp': 0.7588065224933503, 'test_accuracy': 0.6817707729748522, 'test_mcc': 0.36767091882002206, 'test_runtime': 2423.9286, 'test_samples_per_second': 71.198, 'test_steps_per_second': 8.9}
+
+#results/train_protbert_bfd_rnn_freeze/checkpoint-101067
+{'test_loss': 0.2328050285577774, 'test_auc': 0.9082794628642646, 'test_precision': 0.9175528438862683, 'test_recall': 0.8968064104052955, 'test_f1': 0.9070610137837474, 'test_sn': 0.9175528438862683, 'test_sp': 0.9197525153232335, 'test_accuracy': 0.9083033955267122, 'test_mcc': 0.8168053301955162, 'test_runtime': 1767.8983, 'test_samples_per_second': 97.619, 'test_steps_per_second': 12.203}
+
+#results/train_protbert_bfd_rnn/checkpoint-101067
+{'test_loss': 0.6931493878364563, 'test_auc': 0.5, 'test_precision': 0.4989570054467493, 'test_recall': 1.0, 'test_f1': 0.6657389153040318, 'test_sn': 0.4989570054467493, 'test_sp': 0.0, 'test_accuracy': 0.4989570054467493, 'test_mcc': 0.0, 'test_runtime': 1797.8486, 'test_samples_per_second': 95.993, 'test_steps_per_second': 11.999}
