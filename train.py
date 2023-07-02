@@ -5,7 +5,12 @@ from transformers import EarlyStoppingCallback, IntervalStrategy
 from sklearn.metrics import accuracy_score, confusion_matrix, matthews_corrcoef, roc_auc_score
 from tape import ProteinBertConfig
 from torch.utils.data import DataLoader
-from transformers import get_scheduler
+from transformers import get_scheduler, TrainerCallback
+
+from matplotlib import pyplot as plt
+from matplotlib.lines import Line2D
+import numpy as np
+import os
 
 # data loaders
 from dataloader_bert import DataSetLoaderBERT, DataSetLoaderBERT_old
@@ -15,6 +20,53 @@ from transformers import set_seed
 set_seed(42)
 
 import sys
+
+class MyCallback(TrainerCallback):
+    "A callback that prints a message at the beginning of training"
+
+    def on_train_begin(self, args, state, control, **kwargs):
+        print("Starting training")
+
+    def on_epoch_begin(self, args, state, control, **kwargs):
+        #print("Starting training")
+        print("Epoch...")
+        
+        #for d in kwargs:
+        #    print(d)
+        #print(kwargs['model'].classifier.out_proj.weight.grad.norm())
+        named_parameters = kwargs['model'].named_parameters()
+        path = "plots"
+        step = state.global_step
+        
+        ave_grads = []
+        max_grads = []
+        layers = []
+        for n, p in named_parameters:
+            if(p.requires_grad) and ("bias" not in n) and p.grad is not None:
+                layers.append(n)
+                ave_grads.append(p.grad.abs().mean().cpu())
+                max_grads.append(p.grad.abs().max().cpu())
+        plt.bar(np.arange(len(max_grads)), max_grads, alpha=0.3, lw=1, color="c")
+        plt.bar(np.arange(len(max_grads)), ave_grads, alpha=0.3, lw=1, color="b")
+        plt.hlines(0, 0, len(ave_grads)+1, lw=2, color="k")
+        plt.xticks(range(0, len(ave_grads), 1), layers, rotation="vertical")        
+        plt.xlim(left=0, right=len(ave_grads))
+        plt.ylim(bottom=1e-8, top=20)  # zoom in on the lower gradient regions
+        plt.yscale("log")
+        plt.xlabel("Layers")
+        plt.ylabel("average gradient")
+        plt.title("Gradient flow")
+        plt.grid(True)
+        plt.legend([Line2D([0], [0], color="c", lw=4),
+                    Line2D([0], [0], color="b", lw=4),
+                    Line2D([0], [0], color="k", lw=4)], ['max-gradient', 'mean-gradient', 'zero-gradient'])
+        fig = plt.gcf()
+        #fig.set_size_inches(18.5, 10.5)
+        fig.set_size_inches(40, 10.5)
+
+        plt.savefig(os.path.join(
+            path, f"{step:04d}.png"), bbox_inches='tight', dpi=250)
+        fig.clear()
 
 def compute_metrics(pred):
     labels = pred.label_ids
@@ -41,8 +93,8 @@ def compute_metrics(pred):
     }
 
 
-#path_train_csv = "dataset/hlab/hlab_train.csv"
-path_train_csv = "dataset/hlab/hlab_test_micro.csv"
+path_train_csv = "dataset/hlab/hlab_train.csv"
+#path_train_csv = "dataset/hlab/hlab_test_micro.csv"
 path_val_csv = "dataset/hlab/hlab_val.csv"
 
 #path_train_csv = "dataset/netMHCIIpan3.2/train_micro.csv"
@@ -55,13 +107,13 @@ path_val_csv = "dataset/hlab/hlab_val.csv"
 model_type = "bert" # EM1, ESM2, PortBert
 
 # especificar donde se guadra los modlos y resultados
-path_results    = "results/train_tape_rnn/" 
-path_model      = "models/train_tape_rnn/"
+path_results    = "results/train_esm2_t6_rnn2/" 
+path_model      = "models/train_esm2_t6_rnn2/"
 
 # el modelo preentrenado
-#model_name = "bert-base"   # TAPE                   # train 1, 2, 3, 4
-#model_name = "pre_trained_models/esm2_t6_8M_UR50D"          # train 1, 2, 3, 4
-model_name = "pre_trained_models/esm2_t12_35M_UR50D" 
+#model_name = "bert-base"   # TAPE                          # train 1, 2, 3, 4
+model_name = "pre_trained_models/esm2_t6_8M_UR50D"          # train 1, 2, 3, 4
+#model_name = "pre_trained_models/esm2_t12_35M_UR50D" 
 #model_name = "pre_trained_models/esm2_t33_650M_UR50D"       # 
 #model_name = "pre_trained_models/esm2_t30_150M_UR50D"
 #################################################################################
@@ -79,7 +131,7 @@ if model_type == "tape":
 else:
     # read with ESM tokenizer    
     trainset = DataSetLoaderBERT(path=path_train_csv, tokenizer_name=model_name, max_length=max_length)
-    trainset2 = DataSetLoaderBERT_old(path=path_train_csv, tokenizer_name=model_name, max_length=max_length)
+    #trainset2 = DataSetLoaderBERT_old(path=path_train_csv, tokenizer_name=model_name, max_length=max_length)
     valset = DataSetLoaderBERT(path=path_val_csv, tokenizer_name=model_name, max_length=max_length)
     config = BertConfig.from_pretrained(model_name, num_labels=2)
 
@@ -93,40 +145,6 @@ config.cnn_dropout = 0.1
 
 #print(config)
 
-print("Actuales")
-print(trainset[0]['input_ids'])
-print(trainset[0]['attention_mask'])
-print(trainset[0]['attention_mask'].shape)
-
-print("\nOld")
-print(trainset2[0]['input_ids'])
-print(trainset2[0]['attention_mask'])
-print(trainset2[0]['attention_mask'].shape)
-
-print("\n\nActuales")
-print(trainset[1]['input_ids'])
-print(trainset[1]['attention_mask'])
-print(trainset[1]['attention_mask'].shape)
-
-print("\nOld")
-print(trainset2[1]['input_ids'])
-print(trainset2[1]['attention_mask'])
-print(trainset2[1]['attention_mask'].shape)
-
-print("\n\nActuales")
-print(trainset[2]['input_ids'])
-print(trainset[2]['attention_mask'])
-print(trainset[2]['attention_mask'].shape)
-
-print("\nOld")
-print(trainset2[2]['input_ids'])
-print(trainset2[2]['attention_mask'])
-print(trainset2[2]['attention_mask'].shape)
-
-
-
-sys.exit()
-
 #################################################################################
 #################################################################################
 #model_ = TapeLinear.from_pretrained(model_name, config=config)
@@ -135,6 +153,8 @@ sys.exit()
 #model_ = BertLinear.from_pretrained(model_name, config=config)
 model_ = BertRnn.from_pretrained(model_name, config=config)
 
+#################################################################################
+#################################################################################
 # freeze bert layers
 #for param in model_.bert.parameters():
 #    param.requires_grad = False
@@ -147,7 +167,6 @@ model_ = BertRnn.from_pretrained(model_name, config=config)
 #print(next(iterator))
 #print(trainset[0]['input_ids'].shape)
 
-#sys.exit()
 
 ############ hyperparameters ####################################################
 
@@ -178,13 +197,16 @@ momentum = 0.9
 warmup_steps = 0
 
 # hiperparameters HLAB, uso AdamW (en teoria es mejor de SGD with momentum)
-lr = 5e-5
+lr = 5e-5  #-> este se uso en todos los experimentos
+#lr = 2e-5  -> train_esm2_t30_rnn5 NO converge
 #weight_decay = 0.01
 betas = ((0.9, 0.999)) # defult
 warmup_steps = 1000
 
+
 #################################### parameters of ESM2 #################################
 # segun el paper, los modelos grandes en 270K steps, the bigger model es mejor que los modelos pequeños
+# No converge
 """
 - ADAM b1 = 0.9, b2 = 0.98
 - e = 10-8
@@ -192,11 +214,10 @@ warmup_steps = 1000
 - warm up e = 2000 steps to 4e-4 (1.6e-4 for 15B parameters)
 - scheduller linearly decay 
 """
-lr = 4e-4
-weight_decay = 0.01
-betas = ((0.9, 0.98)) # defult
-warmup_steps = 2000
-
+#lr = 4e-4
+#weight_decay = 0.01
+#betas = ((0.9, 0.98)) # defult
+#warmup_steps = 2000
 
 
 # optimizer Adam Weigh Decay https://pytorch.org/docs/stable/generated/torch.optim.AdamW.html
@@ -212,7 +233,7 @@ trainer = Trainer(
         eval_dataset    = valset, 
         compute_metrics = compute_metrics,  
         optimizers      = (optimizer, lr_scheduler),        
-        callbacks       = [EarlyStoppingCallback(early_stopping_patience=5)] 
+        callbacks       = [EarlyStoppingCallback(early_stopping_patience=5), MyCallback] 
     )
 
 #trainer.train(resume_from_checkpoint = True)
