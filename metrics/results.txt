@@ -1,0 +1,8 @@
+train_esm2_t30_rnn  -> Entrenamiento sin freeze, con mi tokenizer. No se verifico el max length -> NO COENVERGE  
+train_esm2_t30_rnn2 -> Entrenamiento sin freeze, con mi tokenizer. Max length = 50 -> NO COENVERGE
+train_esm2_t30_rnn3 -> Entrenamiento sin freeze, con hlab tokenizer. Max length = 50 -> NO COENVERGE
+train_esm2_t30_rnn4 -> Entrenamiento sin freeze, con hlab tokenizer. mismos hiperparametros que esm2 -> NO COENVERGE
+train_esm2_t30_rnn5 -> Entrenamiento sin freeze, con hlab tokenizer. lr = 2e-5 -> NO CONVERGE
+train_esm2_t30_rnn6 -> Entrenamiento sin freeze, con hlab tokenizer. lr = 5e-5, seed(1) -> NO CONVERGE
+train_esm2_t30_rnn7 -> Entrenamiento sin freeze, con hlab tokenizer. lr = 5e-5, seed(random) -> NO CONVERGE
+train_esm2_t30_rnn8 -> Entrenamiento sin freeze, con hlab tokenizer. lr = 5e-5, seed(42) -> Evaluamos las gradientes
