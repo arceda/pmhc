@@ -5,4 +5,26 @@ train_esm2_t30_rnn4 -> Entrenamiento sin freeze, con hlab tokenizer. mismos hipe
 train_esm2_t30_rnn5 -> Entrenamiento sin freeze, con hlab tokenizer. lr = 2e-5 -> NO CONVERGE
 train_esm2_t30_rnn6 -> Entrenamiento sin freeze, con hlab tokenizer. lr = 5e-5, seed(1) -> NO CONVERGE
 train_esm2_t30_rnn7 -> Entrenamiento sin freeze, con hlab tokenizer. lr = 5e-5, seed(random) -> NO CONVERGE
-train_esm2_t30_rnn8 -> Entrenamiento sin freeze, con hlab tokenizer. lr = 5e-5, seed(42) -> Evaluamos las gradientes
+train_esm2_t30_rnn8 -> Entrenamiento sin freeze, con hlab tokenizer. lr = 5e-5, seed(42) -> Evaluamos las gradientes -> NO CONVERGE
+
+train_esm2_t30_rnn9 -> CONVERGE :)
+
+        gradient_accumulation_steps = 64,  # total number of steps before back propagation
+        fp16                        = True,  # Use mixed precision
+        fp16_opt_level              = "02",  # mixed precision model
+
+train_esm2_t30_rnn10 -> NO COENVERGE
+
+        plotgradients, evaluated each 1000 steps 
+        
+train_esm2_t30_rnn11 -> CONVERGE !!!
+
+        plotgradients, evaluated each 100 optimization steps, 
+        plot gradients each 64 spteps. 
+        Se agrego gradient accumulation steps 64
+
+train_esm2_t30_rnn12 -> CONVERGE !!!  Lo mismo al 11, solo que ahora ploteamos cada vez que evaluamos.
+
+        plotgradients, evaluated each 100 optimization steps, 
+        plot gradients each 100 optimization spteps. 
+        Se agrego gradient accumulation steps 64
