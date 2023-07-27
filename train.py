@@ -115,8 +115,8 @@ path_val_csv = "dataset/hlab/hlab_val.csv"
 #################################################################################
 #################################################################################
 # Especificar si usaremos tape o bert
-#model_type = "tape"
-model_type = "bert" # EM1, ESM2, PortBert
+model_type = "tape"
+#model_type = "bert" # EM1, ESM2, PortBert
 
 # especificar donde se guadra los modlos y resultados
 #path_results    = "results/train_protbert_bfd_rnn/" 
@@ -127,19 +127,22 @@ model_type = "bert" # EM1, ESM2, PortBert
 #path_model      = "models/train_esm2_t30_rnn10/"
 #path_results    = "results/train_esm2_t30_rnn11/" # plotgradients, evaluated each 100 optimization steps, plot gradients each 64 spteps. Se agrego gradient accumulation steps 64
 #path_model      = "models/train_esm2_t30_rnn11/"
-path_results    = "results/train_esm2_t30_rnn12/" # plotgradients, evaluated each 100 optimization steps, plot gradients each 100 optimization spteps. Se agrego gradient accumulation steps 64
-path_model      = "models/train_esm2_t30_rnn12/"
+#path_results    = "results/train_esm2_t30_rnn12/" # plotgradients, evaluated each 100 optimization steps, plot gradients each 100 optimization spteps. Se agrego gradient accumulation steps 64
+#path_model      = "models/train_esm2_t30_rnn12/"
+path_results    = "results/train_tape_rnn2/" # evaluated each 100 optimization steps, plot gradients each 100 optimization spteps. Se agrego gradient accumulation steps 64
+path_model      = "models/train_tape_rnn2/"
+
 
 #path_results    = "results/train_esm2_t6_rnn2/" # con trainner plot gradients, todo bien :) 
 #path_model      = "models/train_esm2_t6_rnn2/"
 
 
 # el modelo preentrenado
-#model_name = "bert-base"   # TAPE                   # train 1, 2, 3, 4
+model_name = "bert-base"   # TAPE                   # train 1, 2, 3, 4
 #model_name = "pre_trained_models/esm2_t6_8M_UR50D"          # train 1, 2, 3, 4
 #model_name = "pre_trained_models/esm2_t12_35M_UR50D" 
 #model_name = "pre_trained_models/esm2_t33_650M_UR50D"       # 
-model_name = "pre_trained_models/esm2_t30_150M_UR50D"
+#model_name = "pre_trained_models/esm2_t30_150M_UR50D"
 #model_name = "pre_trained_models/prot_bert_bfd"
 #################################################################################
 #################################################################################
@@ -172,10 +175,10 @@ config.cnn_dropout = 0.1
 #################################################################################
 #################################################################################
 #model_ = TapeLinear.from_pretrained(model_name, config=config)
-#model_ = TapeRnn.from_pretrained(model_name, config=config)
+model_ = TapeRnn.from_pretrained(model_name, config=config)
 #model_ = TapeRnnAtt.from_pretrained(model_name, config=config)
 #model_ = BertLinear.from_pretrained(model_name, config=config)
-model_ = BertRnn.from_pretrained(model_name, config=config)
+#model_ = BertRnn.from_pretrained(model_name, config=config)
 
 # freeze bert layers
 #for param in model_.bert.parameters():
@@ -204,7 +207,7 @@ model_ = BertRnn.from_pretrained(model_name, config=config)
 ############ hyperparameters ####################################################
 
 num_samples = len(trainset)
-num_epochs = 10
+num_epochs = 3
 batch_size = 16  # segun hlab, se obtienen mejoes resutlados
 num_training_steps = num_epochs * num_samples
 
@@ -216,7 +219,7 @@ training_args = TrainingArguments(
         logging_dir                 = path_results,        
         logging_strategy            = "steps", #epoch
         #eval_steps                  = num_samples/batch_size, # How often to eval      
-        eval_steps                  = 100, # cada 200 optimization steps !!! esto es distinto a los steps
+        eval_steps                  = 100, # cada 500 optimization steps !!! esto es distinto a los steps
         save_steps                  = 100, # esto solo es  necesario cuando evaluamos cada 1000 steps
         metric_for_best_model       = 'f1',
         load_best_model_at_end      = True,        
@@ -279,8 +282,8 @@ trainer = Trainer(
         callbacks       = [EarlyStoppingCallback(early_stopping_patience=10)] 
     )
 
-trainer.train(resume_from_checkpoint = True)
-#trainer.train()
+#trainer.train(resume_from_checkpoint = True)
+trainer.train()
 trainer.save_model(path_model)
 
 
