@@ -58,3 +58,29 @@ esm2_t33_rnn_acc_steps/checkpoint-1578
 {'test_loss': 0.2328050285577774, 'test_auc': 0.9082794628642646, 'test_precision': 0.9175528438862683, 'test_recall': 0.8968064104052955, 'test_f1': 0.9070610137837474, 'test_sn': 0.9175528438862683, 'test_sp': 0.9197525153232335, 'test_accuracy': 0.9083033955267122, 'test_mcc': 0.8168053301955162, 'test_runtime': 1767.8983, 'test_samples_per_second': 97.619, 'test_steps_per_second': 12.203}
 # protbert_bfd_rnn
 {'test_loss': 0.6931493878364563, 'test_auc': 0.5, 'test_precision': 0.4989570054467493, 'test_recall': 1.0, 'test_f1': 0.6657389153040318, 'test_sn': 0.4989570054467493, 'test_sp': 0.0, 'test_accuracy': 0.4989570054467493, 'test_mcc': 0.0, 'test_runtime': 1797.8486, 'test_samples_per_second': 95.993, 'test_steps_per_second': 11.999}
+
+
+#### 30 epochs #####################################
+
+results/train_esm2_t30_rnn_acc_steps_30_epochs/checkpoint-8942
+{'test_loss': 0.17590250074863434, 'test_auc': 0.9345708825129299, 'test_precision': 0.9337275362318841, 'test_recall': 0.9352456160724655, 'test_f1': 0.9344859596194013, 'test_sn': 0.9337275362318841, 'test_sp': 0.9338961489533942, 'test_accuracy': 0.9345694750260749, 'test_mcc': 0.8691399674346117, 'test_runtime': 735.985, 'test_samples_per_second': 234.488, 'test_steps_per_second': 29.312}
+
+results/train_esm2_t30_rnn_freeze_30epochs/checkpoint-471646
+{'test_loss': 0.2924878001213074, 'test_auc': 0.9392722740123979, 'test_precision': 0.9303680772119916, 'test_recall': 0.949297410289165, 'test_f1': 0.9397374290115651, 'test_sn': 0.9303680772119916, 'test_sp': 0.9292471377356308, 'test_accuracy': 0.9392513616873334, 'test_mcc': 0.8786884592867074, 'test_runtime': 738.6256, 'test_samples_per_second': 233.65, 'test_steps_per_second': 29.207}
+
+results/train_esm2_t30_rnn_freeze_acc_steps_30epochs/checkpoint-14202
+{'test_loss': 0.17396798729896545, 'test_auc': 0.9363003766204302, 'test_precision': 0.9319088745011902, 'test_recall': 0.941075368714435, 'test_f1': 0.9364696909289466, 'test_sn': 0.9319088745011902, 'test_sp': 0.9315253845264253, 'test_accuracy': 0.9362904160389385, 'test_mcc': 0.8726249243709596, 'test_runtime': 732.7672, 'test_samples_per_second': 235.518, 'test_steps_per_second': 29.44}
+
+
+
+results/train_esm2_t6_rnn_30epochs/checkpoint-303201
+{'test_loss': 0.25751224160194397, 'test_auc': 0.9389805986267642, 'test_precision': 0.9332500200639754, 'test_recall': 0.9452909069794448, 'test_f1': 0.9392318742752306, 'test_sn': 0.9332500200639754, 'test_sp': 0.9326702902740835, 'test_accuracy': 0.9389674353922819, 'test_mcc': 0.8780103917789137, 'test_runtime': 249.6694, 'test_samples_per_second': 691.234, 'test_steps_per_second': 86.406}
+
+results/train_esm2_t6_rnn_acc_steps_30epochs/checkpoint-7890
+{'test_loss': 0.17054903507232666, 'test_auc': 0.9365900018932486, 'test_precision': 0.9322361384259739, 'test_recall': 0.9413192428289398, 'test_f1': 0.9367556729207959, 'test_sn': 0.9322361384259739, 'test_sp': 0.9318607609575575, 'test_accuracy': 0.9365801367481748, 'test_mcc': 0.87320356891393, 'test_runtime': 252.3659, 'test_samples_per_second': 683.848, 'test_steps_per_second': 85.483}
+
+results/train_esm2_t6_rnn_freeze_30epochs/checkpoint-202134
+{'test_loss': 0.17762009799480438, 'test_auc': 0.9401090369926439, 'test_precision': 0.9398305084745763, 'test_recall': 0.9401579375217745, 'test_f1': 0.9399941944847605, 'test_sn': 0.9398305084745763, 'test_sp': 0.9400601364635134, 'test_accuracy': 0.9401089349866728, 'test_mcc': 0.8802174888234441, 'test_runtime': 247.991, 'test_samples_per_second': 695.912, 'test_steps_per_second': 86.991}
+
+results/train_esm2_t6_rnn_freeze_acc_steps_30epochs/checkpoint-8942
+{'test_loss': 0.17307811975479126, 'test_auc': 0.9353984068911081, 'test_precision': 0.9325946445060018, 'test_recall': 0.938334688189525, 'test_f1': 0.9354558610709116, 'test_sn': 0.9325946445060018, 'test_sp': 0.9324621255926911, 'test_accuracy': 0.935392281840306, 'test_mcc': 0.8708020823978937, 'test_runtime': 254.7279, 'test_samples_per_second': 677.507, 'test_steps_per_second': 84.69}
