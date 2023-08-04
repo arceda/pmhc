@@ -48,62 +48,7 @@ def compute_metrics(pred):
     }
 
 
-class MyCallback(TrainerCallback):
-    "A callback that prints a message at the beginning of training"
 
-    def on_train_begin(self, args, state, control, **kwargs):
-        print("Starting training")
-
-    def on_epoch_end(self, args, state, control, **kwargs):
-        #print("Starting training")
-        print("Epoch end...")
-        #lista = []
-        #print( lista[1] ) # un error intensioado para terminar el entrenamiento al finalizar un epoch
-        
-        """
-        named_parameters = kwargs['model'].named_parameters()
-        path = "plots"
-        step = state.global_step
-        
-        ave_grads = []
-        max_grads = []
-        layers = []
-        for n, p in named_parameters:
-            if(p.requires_grad) and ("bias" not in n) and p.grad is not None:
-                layers.append(n)
-                
-                #print(p.grad.abs().mean())
-                #print(p.grad.abs().max())
-                
-                ave_grads.append(p.grad.abs().mean().cpu())
-                max_grads.append(p.grad.abs().max().cpu())
-                
-        #print(ave_grads)
-        #print(max_grads)
-        
-        plt.bar(np.arange(len(max_grads)), max_grads, alpha=0.3, lw=1, color="c")
-        plt.bar(np.arange(len(max_grads)), ave_grads, alpha=0.3, lw=1, color="b")
-        plt.hlines(0, 0, len(ave_grads)+1, lw=2, color="k")
-        plt.xticks(range(0, len(ave_grads), 1), layers, rotation="vertical")        
-        plt.xlim(left=0, right=len(ave_grads))
-        plt.ylim(bottom=1e-8, top=20)  # zoom in on the lower gradient regions
-        plt.yscale("log")
-        plt.xlabel("Layers")
-        plt.ylabel("average gradient")
-        plt.title("Gradient flow")
-        plt.grid(True)
-        plt.legend([Line2D([0], [0], color="c", lw=4),
-                    Line2D([0], [0], color="b", lw=4),
-                    Line2D([0], [0], color="k", lw=4)], ['max-gradient', 'mean-gradient', 'zero-gradient'])
-        fig = plt.gcf()
-        #fig.set_size_inches(18.5, 10.5)
-        fig.set_size_inches(40, 10.5)
-
-        plt.savefig(os.path.join(
-            path, f"{step:04d}.png"), bbox_inches='tight', dpi=250)
-        fig.clear()
-        """
-        
         
 
 path_train_csv = "dataset/hlab/hlab_train.csv"
@@ -115,8 +60,8 @@ path_val_csv = "dataset/hlab/hlab_val.csv"
 #################################################################################
 #################################################################################
 # Especificar si usaremos tape o bert
-model_type = "tape"
-#model_type = "bert" # EM1, ESM2, PortBert
+#model_type = "tape"
+model_type = "bert" # EM1, ESM2, PortBert
 
 # especificar donde se guadra los modlos y resultados
 #path_results    = "results/train_protbert_bfd_rnn/" 
@@ -129,8 +74,8 @@ model_type = "tape"
 #path_model      = "models/train_esm2_t30_rnn11/"
 #path_results    = "results/train_esm2_t30_rnn12/" # plotgradients, evaluated each 100 optimization steps, plot gradients each 100 optimization spteps. Se agrego gradient accumulation steps 64
 #path_model      = "models/train_esm2_t30_rnn12/"
-path_results    = "results/train_tape_rnn2/" # evaluated each 100 optimization steps, plot gradients each 100 optimization spteps. Se agrego gradient accumulation steps 64
-path_model      = "models/train_tape_rnn2/"
+path_results    = "results/train_esm2_t6_rnn_freeze_acc_steps_30epochs/" 
+path_model      = "models/train_esm2_t6_rnn_freeze_acc_steps_30epochs/"
 
 
 #path_results    = "results/train_esm2_t6_rnn2/" # con trainner plot gradients, todo bien :) 
@@ -138,11 +83,11 @@ path_model      = "models/train_tape_rnn2/"
 
 
 # el modelo preentrenado
-model_name = "bert-base"   # TAPE                   # train 1, 2, 3, 4
-#model_name = "pre_trained_models/esm2_t6_8M_UR50D"          # train 1, 2, 3, 4
+#model_name = "bert-base"   # TAPE                   # train 1, 2, 3, 4
+model_name = "pre_trained_models/esm2_t6_8M_UR50D"          # train 1, 2, 3, 4
 #model_name = "pre_trained_models/esm2_t12_35M_UR50D" 
-#model_name = "pre_trained_models/esm2_t33_650M_UR50D"       # 
 #model_name = "pre_trained_models/esm2_t30_150M_UR50D"
+#model_name = "pre_trained_models/esm2_t33_650M_UR50D"       # 
 #model_name = "pre_trained_models/prot_bert_bfd"
 #################################################################################
 #################################################################################
@@ -175,24 +120,16 @@ config.cnn_dropout = 0.1
 #################################################################################
 #################################################################################
 #model_ = TapeLinear.from_pretrained(model_name, config=config)
-model_ = TapeRnn.from_pretrained(model_name, config=config)
+#model_ = TapeRnn.from_pretrained(model_name, config=config)
 #model_ = TapeRnnAtt.from_pretrained(model_name, config=config)
 #model_ = BertLinear.from_pretrained(model_name, config=config)
-#model_ = BertRnn.from_pretrained(model_name, config=config)
+model_ = BertRnn.from_pretrained(model_name, config=config)
 
 # freeze bert layers
-#for param in model_.bert.parameters():
-#    param.requires_grad = False
+for param in model_.bert.parameters():
+    param.requires_grad = False
     
 #################################################################################
-#################################################################################
-
-
-# check gradients ###############################################################
-#for name, param in model_.named_parameters():
-#    print(name, param.grad.norm())        
-# plot gradients: https://gist.github.com/viantirreau/ec591a428a5c0112bd8fa84f70968574
-# https://stackoverflow.com/questions/68759885/print-input-output-grad-loss-at-every-step-epoch-when-training-transformer
 #################################################################################
 
 
@@ -207,7 +144,7 @@ model_ = TapeRnn.from_pretrained(model_name, config=config)
 ############ hyperparameters ####################################################
 
 num_samples = len(trainset)
-num_epochs = 3
+num_epochs = 30
 batch_size = 16  # segun hlab, se obtienen mejoes resutlados
 num_training_steps = num_epochs * num_samples
 
@@ -217,14 +154,15 @@ training_args = TrainingArguments(
         per_device_train_batch_size = batch_size,   
         per_device_eval_batch_size  = batch_size * 8,         
         logging_dir                 = path_results,        
-        logging_strategy            = "steps", #epoch
-        #eval_steps                  = num_samples/batch_size, # How often to eval      
-        eval_steps                  = 100, # cada 500 optimization steps !!! esto es distinto a los steps
-        save_steps                  = 100, # esto solo es  necesario cuando evaluamos cada 1000 steps
+        logging_strategy            = "epoch", #epoch or steps
+        eval_steps                  = num_samples/batch_size, 
+        save_steps                  = num_samples/batch_size,  
+        #eval_steps                  = 100, # cada 500 optimization steps !!! esto es distinto a los steps
+        #save_steps                  = 100, # esto solo es  necesario cuando evaluamos cada 1000 steps
         metric_for_best_model       = 'f1',
         load_best_model_at_end      = True,        
-        evaluation_strategy         = "steps", #epch
-        save_strategy               = "steps", #epoch
+        evaluation_strategy         = "epoch", #epoch or steps
+        save_strategy               = "epoch", #epoch or steps
         #debug="debug underflow_overflow"
     
         # cambios para tratar de evitar vanish gradients
@@ -279,7 +217,7 @@ trainer = Trainer(
         compute_metrics = compute_metrics,  
         optimizers      = (optimizer, lr_scheduler),        
         #callbacks       = [EarlyStoppingCallback(early_stopping_patience=5), MyCallback()] 
-        callbacks       = [EarlyStoppingCallback(early_stopping_patience=10)] 
+        callbacks       = [EarlyStoppingCallback(early_stopping_patience=3)] 
     )
 
 #trainer.train(resume_from_checkpoint = True)
