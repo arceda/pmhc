@@ -1,4 +1,5 @@
 models/*
+predictions/*
 results/*
 __pycache__/*
 netMHCpan-4.1/*
