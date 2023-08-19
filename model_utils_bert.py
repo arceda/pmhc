@@ -305,26 +305,93 @@ class BertRnn(BertPreTrainedModel):
             attentions=bert_out.attentions,
         )
 
-def compute_metrics(pred):
-    labels = pred.label_ids
-    prediction=pred.predictions
-    preds = prediction.argmax(-1)
-    tn, fp, fn, tp = confusion_matrix(labels, preds).ravel()
-    precision = tp / (tp + fp) 
-    recall = tp / (tp + fn)
-    sn = tp / (tp + fp)       
-    sp = tn / (tn + fp)  # true negative rate
-    mcc = matthews_corrcoef(labels, preds)
-    acc = accuracy_score(labels, preds)
-    auc = roc_auc_score(labels, preds)
-    f1 = 2 * (precision * recall) / (precision + recall)
-    return {
-        'auc': auc,
-        'precision': precision,
-        'recall': recall,
-        'f1': f1,
-        'sn': sn,
-        'sp': sp,
-        'accuracy': acc,
-        'mcc': mcc
-    }
+
+
+class BertRnnSigmoid(BertPreTrainedModel):
+    def __init__(self, config):
+        super().__init__(config)
+        self.num_labels = config.num_labels
+        self.rnn_type = config.rnn
+        self.num_rnn_layer = config.num_rnn_layer
+        self.hidden_size = config.hidden_size
+        self.rnn_dropout = config.rnn_dropout
+        self.rnn_hidden = config.rnn_hidden
+        self.max_seq_len = config.length
+
+        self.bert = BertModel(config)
+        
+        self.rnn = nn.LSTM(input_size=self.hidden_size, hidden_size=self.rnn_hidden, bidirectional=True,
+                               num_layers=self.num_rnn_layer, batch_first=True, dropout=self.rnn_dropout)
+        
+        self.dropout = nn.Dropout(self.rnn_dropout)
+        self.classifier = nn.Linear(2*self.rnn_hidden, 1)
+        self.sigmoid = nn.Sigmoid()
+
+        self.init_weights()
+
+        reduction = 'mean'
+
+        self.criterion = nn.CrossEntropyLoss(reduction=reduction)
+
+    @add_start_docstrings_to_model_forward(BERT_INPUTS_DOCSTRING.format("batch_size, sequence_length"))
+    def forward(
+            self,
+            input_ids=None,
+            attention_mask=None,
+            token_type_ids=None,
+            position_ids=None,
+            head_mask=None,
+            inputs_embeds=None,
+            labels=None,
+            output_attentions=None,
+            output_hidden_states=None,
+            return_dict=None,
+    ):
+        return_dict = return_dict if return_dict is not None else self.config.use_return_dict
+
+        batch_size = input_ids.shape[0]
+        token_type_ids = None
+
+        bert_out = self.bert(
+            input_ids,
+            attention_mask=attention_mask,
+            token_type_ids=token_type_ids,
+            position_ids=position_ids,
+            head_mask=head_mask,
+            inputs_embeds=inputs_embeds,
+            output_attentions=output_attentions,
+            output_hidden_states=output_hidden_states,
+            return_dict=return_dict,
+        )
+        # lstm
+        sequence_output = bert_out[0]
+        rnn_out, (ht, ct) = self.rnn(sequence_output)        
+
+        output = rnn_out.permute(0, 2, 1)
+        output = torch.nn.functional.max_pool1d(output, self.max_seq_len)
+        model_output = self.dropout(output.squeeze())
+        logits = self.classifier(model_output)
+        logits = self.sigmoid(logits)
+
+        loss = None
+        if labels is not None:
+            loss_fct = nn.BCELoss() # binary cross entropy -> no converge
+            #loss_fct = nn.BCEWithLogitsLoss()
+            loss = loss_fct(logits.view(-1), labels.to(torch.float32))
+            #print(logits.view(-1), labels.to(torch.float32))
+            #loss_fct = self.criterion
+            #loss = loss_fct(logits.view(-1, self.num_labels), labels.view(-1))
+            #print(logits.view(-1, self.num_labels), labels.view(-1))
+
+        if not return_dict:
+            output = (logits,) + (model_output,)
+            res=(loss,) + output
+            return ((loss,) + output) if loss is not None else output
+
+        return SequenceClassifierOutput(
+            loss=loss,
+            logits=logits,
+            hidden_states=bert_out.hidden_states,
+            attentions=bert_out.attentions,
+        )
+

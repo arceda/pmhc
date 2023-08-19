@@ -1,8 +1,9 @@
 from transformers import Trainer, TrainingArguments, BertConfig, AdamW
-from model_utils_bert import BertLinear, BertRnn, BertRnnAtt
+from model_utils_bert import BertLinear, BertRnn, BertRnnAtt, BertRnnSigmoid
 from model_utils_tape import TapeLinear, TapeRnn, TapeRnnAtt
+from utils import compute_metrics
 from transformers import EarlyStoppingCallback, IntervalStrategy
-from sklearn.metrics import accuracy_score, confusion_matrix, matthews_corrcoef, roc_auc_score
+
 from tape import ProteinBertConfig
 from torch.utils.data import DataLoader
 from transformers import get_scheduler, TrainerCallback
@@ -23,29 +24,6 @@ set_seed(42)
 import sys
 
 
-def compute_metrics(pred):
-    labels = pred.label_ids
-    prediction=pred.predictions
-    preds = prediction.argmax(-1)
-    tn, fp, fn, tp = confusion_matrix(labels, preds).ravel()
-    precision = tp / (tp + fp) 
-    recall = tp / (tp + fn)
-    sn = tp / (tp + fp)       
-    sp = tn / (tn + fp)  # true negative rate
-    mcc = matthews_corrcoef(labels, preds)
-    acc = accuracy_score(labels, preds)
-    auc = roc_auc_score(labels, preds)
-    f1 = 2 * (precision * recall) / (precision + recall)
-    return {
-        'auc': auc,
-        'precision': precision,
-        'recall': recall,
-        'f1': f1,
-        'sn': sn,
-        'sp': sp,
-        'accuracy': acc,
-        'mcc': mcc
-    }
 
 
 
@@ -53,6 +31,8 @@ def compute_metrics(pred):
 
 path_train_csv = "dataset/hlab/hlab_train.csv"
 path_val_csv = "dataset/hlab/hlab_val.csv"
+#path_train_csv = "dataset/hlab/hlab_train_micro.csv"
+#path_val_csv = "dataset/hlab/hlab_val_micro.csv"
 
 #path_train_csv = "dataset/netMHCIIpan3.2/train_micro.csv"
 #path_val_csv = "dataset/netMHCIIpan3.2/eval_micro.csv"
@@ -60,8 +40,8 @@ path_val_csv = "dataset/hlab/hlab_val.csv"
 #################################################################################
 #################################################################################
 # Especificar si usaremos tape o bert
-#model_type = "tape"
-model_type = "bert" # EM1, ESM2, PortBert
+model_type = "tape"
+#model_type = "bert" # EM1, ESM2, PortBert
 
 # especificar donde se guadra los modlos y resultados
 #path_results    = "results/train_protbert_bfd_rnn/" 
@@ -74,8 +54,8 @@ model_type = "bert" # EM1, ESM2, PortBert
 #path_model      = "models/train_esm2_t30_rnn11/"
 #path_results    = "results/train_esm2_t30_rnn12/" # plotgradients, evaluated each 100 optimization steps, plot gradients each 100 optimization spteps. Se agrego gradient accumulation steps 64
 #path_model      = "models/train_esm2_t30_rnn12/"
-path_results    = "results/train_esm2_t6_rnn_freeze_acc_steps_30epochs/" 
-path_model      = "models/train_esm2_t6_rnn_freeze_acc_steps_30epochs/"
+path_results    = "results/train_tape_rnn_acc_steps_30_epochs/" 
+path_model      = "models/train_tape_rnn_acc_steps_30_epochs/"
 
 
 #path_results    = "results/train_esm2_t6_rnn2/" # con trainner plot gradients, todo bien :) 
@@ -83,8 +63,8 @@ path_model      = "models/train_esm2_t6_rnn_freeze_acc_steps_30epochs/"
 
 
 # el modelo preentrenado
-#model_name = "bert-base"   # TAPE                   # train 1, 2, 3, 4
-model_name = "pre_trained_models/esm2_t6_8M_UR50D"          # train 1, 2, 3, 4
+model_name = "bert-base"   # TAPE                   # train 1, 2, 3, 4
+#model_name = "pre_trained_models/esm2_t6_8M_UR50D"          # train 1, 2, 3, 4
 #model_name = "pre_trained_models/esm2_t12_35M_UR50D" 
 #model_name = "pre_trained_models/esm2_t30_150M_UR50D"
 #model_name = "pre_trained_models/esm2_t33_650M_UR50D"       # 
@@ -120,14 +100,15 @@ config.cnn_dropout = 0.1
 #################################################################################
 #################################################################################
 #model_ = TapeLinear.from_pretrained(model_name, config=config)
-#model_ = TapeRnn.from_pretrained(model_name, config=config)
+model_ = TapeRnn.from_pretrained(model_name, config=config)
 #model_ = TapeRnnAtt.from_pretrained(model_name, config=config)
 #model_ = BertLinear.from_pretrained(model_name, config=config)
-model_ = BertRnn.from_pretrained(model_name, config=config)
+#model_ = BertRnn.from_pretrained(model_name, config=config)
+#model_ = BertRnnSigmoid.from_pretrained(model_name, config=config)
 
 # freeze bert layers
-for param in model_.bert.parameters():
-    param.requires_grad = False
+#for param in model_.bert.parameters():
+#    param.requires_grad = False
     
 #################################################################################
 #################################################################################

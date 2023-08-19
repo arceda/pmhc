@@ -1,13 +1,23 @@
-# tape_rnn:
+tape_rnn:
 {'test_loss': 0.693148672580719, 'test_auc': 0.5, 'test_precision': 0.4989570054467493, 'test_recall': 1.0, 
  'test_f1': 0.6657389153040318, 'test_sn': 0.4989570054467493, 'test_sp': 0.0, 'test_accuracy': 0.4989570054467493, 
  'test_mcc': 0.0, 'test_runtime': 739.9707, 'test_samples_per_second': 233.225, 'test_steps_per_second': 29.154}
-# tape_rnn freeze:
+
+train_tape_rnn_acc_steps/checkpoint-1578
+{'test_loss': 0.1709851175546646, 'test_auc': 0.937143841246892, 'test_precision': 0.9290364509104176, 'test_recall': 0.9462664034374637, 'test_f1': 0.9375722742884759, 'test_sn': 0.9290364509104176, 'test_sp': 0.9280212790563201, 'test_accuracy': 0.937124811681539, 'test_mcc': 0.8744036847295358, 'test_runtime': 457.2252, 'test_samples_per_second': 377.451, 'test_steps_per_second': 47.182}
+
+tape_rnn freeze (old):
 {'test_loss': 0.18280650675296783, 'test_auc': 0.9345493392049244, 'test_precision': 0.9282606704524639, 'test_recall': 0.9415631169434444, 
  'test_f1': 0.9348645750458334, 'test_sn': 0.9282606704524639, 'test_sp': 0.9275355614664045, 'test_accuracy': 0.9345347085409665, 
  'test_mcc': 0.8691616281324402, 'test_runtime': 738.5142, 'test_samples_per_second': 233.685, 'test_steps_per_second': 29.211}
 
+ train_tape_rnn_freeze/checkpoint-101067
+ {'test_loss': 0.1825072318315506, 'test_auc': 0.934184978489663, 'test_precision': 0.9276209654351781, 'test_recall': 0.9415282777842294, 'test_f1': 0.934522883275412, 'test_sn': 0.9276209654351781, 'test_sp': 0.9268416791950965, 'test_accuracy': 0.9341696604473287, 'test_mcc': 0.868440051529141, 'test_runtime': 459.3184, 'test_samples_per_second': 375.731, 'test_steps_per_second': 46.967}
+               
+ tape_rnn_freeze_acc_steps/checkpoint-1578
+ {'test_loss': 0.26691627502441406, 'test_auc': 0.8913763129199801, 'test_precision': 0.8851180607169401, 'test_recall': 0.8989432121704796, 'test_f1': 0.8919770691095554, 'test_sn': 0.8851180607169401, 'test_sp': 0.8838094136694807, 'test_accuracy': 0.8913605284505737, 'test_mcc': 0.7828222711639552, 'test_runtime': 455.3511, 'test_samples_per_second': 379.004, 'test_steps_per_second': 47.377}
 
+ 
 # esm2_t6_rnn
 {'test_loss': 0.181810662150383, 'test_auc': 0.9344497190324751, 'test_precision': 0.9333897303373391, 'test_recall': 0.9353733596562537, 'test_f1': 0.9343804922188129, 'test_sn': 0.9333897303373391, 'test_sp': 0.9335260784086966, 'test_accuracy': 0.9344477923281956, 'test_mcc': 0.8688975481449908, 'test_runtime': 353.1484, 'test_samples_per_second': 488.69, 'test_steps_per_second': 61.088}
 esm2_t6_rnn_acc_steps
@@ -58,12 +68,24 @@ esm2_t33_rnn_acc_steps/checkpoint-1578
 {'test_loss': 0.2328050285577774, 'test_auc': 0.9082794628642646, 'test_precision': 0.9175528438862683, 'test_recall': 0.8968064104052955, 'test_f1': 0.9070610137837474, 'test_sn': 0.9175528438862683, 'test_sp': 0.9197525153232335, 'test_accuracy': 0.9083033955267122, 'test_mcc': 0.8168053301955162, 'test_runtime': 1767.8983, 'test_samples_per_second': 97.619, 'test_steps_per_second': 12.203}
 # protbert_bfd_rnn
 {'test_loss': 0.6931493878364563, 'test_auc': 0.5, 'test_precision': 0.4989570054467493, 'test_recall': 1.0, 'test_f1': 0.6657389153040318, 'test_sn': 0.4989570054467493, 'test_sp': 0.0, 'test_accuracy': 0.4989570054467493, 'test_mcc': 0.0, 'test_runtime': 1797.8486, 'test_samples_per_second': 95.993, 'test_steps_per_second': 11.999}
+train_protbert_rnn_acc_steps/checkpoint-789
+{'test_loss': 0.22270525991916656, 'test_auc': 0.9136858447143694, 'test_precision': 0.9569311694143307, 'test_recall': 0.8661944025084195, 'test_f1': 0.9093048063149554, 'test_sn': 0.9569311694143307, 'test_sp': 0.9611772869203192, 'test_accuracy': 0.913784911345463, 'test_mcc': 0.8312662659583053, 'test_runtime': 2294.8449, 'test_samples_per_second': 75.203, 'test_steps_per_second': 9.401}
+train_protbert_rnn_freeze_acc_steps/checkpoint-789
+{'test_loss': 0.4647173583507538, 'test_auc': 0.7866171227436857, 'test_precision': 0.7332821708070415, 'test_recall': 0.8987922424805481, 'test_f1': 0.8076449471970614, 'test_sn': 0.7332821708070415, 'test_sp': 0.6744420030068232, 'test_accuracy': 0.786383126665894, 'test_mcc': 0.5880621057245331, 'test_runtime': 2292.3166, 'test_samples_per_second': 75.286, 'test_steps_per_second': 9.411}
 
 
-#### 30 epochs #####################################
+#################################################################################
+#### 30 epochs ##################################################################
+#################################################################################
 
 tape_rnn_30_epochs
 {'test_loss': 0.244050070643425, 'test_auc': 0.9399862397341088, 'test_precision': 0.9329264110829161, 'test_recall': 0.9478341656021368, 'test_f1': 0.9403212055577317, 'test_sn': 0.9329264110829161, 'test_sp': 0.9321383138660807, 'test_accuracy': 0.9399698690462395, 'test_mcc': 0.8800551010203294, 'test_runtime': 454.3314, 'test_samples_per_second': 379.855, 'test_steps_per_second': 47.483}
+9 epoch
+{'test_loss': 0.21242856979370117, 'test_auc': 0.9395151999581194, 'test_precision': 0.9404246403128929, 'test_recall': 0.9382185576588085, 'test_f1': 0.9393203036891488, 'test_sn': 0.9404246403128929, 'test_sp': 0.9408118422574303, 'test_accuracy': 0.9395179047398308, 'test_mcc': 0.8790371010378881, 'test_runtime': 640.5549, 'test_samples_per_second': 269.423, 'test_steps_per_second': 33.679}
+train_tape_rnn_freeze_acc_steps_30_epochs/checkpoint-9468
+{'test_loss': 0.17032869160175323, 'test_auc': 0.9359223916867248, 'test_precision': 0.9297108502719725, 'test_recall': 0.9428289397282545, 'test_f1': 0.9362239455703866, 'test_sn': 0.9297108502719725, 'test_sp': 0.9290158436451948, 'test_accuracy': 0.9359079847027465, 'test_mcc': 0.8719056077923116, 'test_runtime': 474.3322, 'test_samples_per_second': 363.838, 'test_steps_per_second': 45.481}
+
+
 
 results/train_esm2_t30_rnn_acc_steps_30_epochs/checkpoint-8942
 {'test_loss': 0.17590250074863434, 'test_auc': 0.9345708825129299, 'test_precision': 0.9337275362318841, 'test_recall': 0.9352456160724655, 'test_f1': 0.9344859596194013, 'test_sn': 0.9337275362318841, 'test_sp': 0.9338961489533942, 'test_accuracy': 0.9345694750260749, 'test_mcc': 0.8691399674346117, 'test_runtime': 735.985, 'test_samples_per_second': 234.488, 'test_steps_per_second': 29.312}
