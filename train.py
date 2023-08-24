@@ -40,8 +40,8 @@ path_val_csv = "dataset/hlab/hlab_val.csv"
 #################################################################################
 #################################################################################
 # Especificar si usaremos tape o bert
-model_type = "tape"
-#model_type = "bert" # EM1, ESM2, PortBert
+#model_type = "tape"
+model_type = "bert" # EM1, ESM2, PortBert
 
 # especificar donde se guadra los modlos y resultados
 #path_results    = "results/train_protbert_bfd_rnn/" 
@@ -54,8 +54,8 @@ model_type = "tape"
 #path_model      = "models/train_esm2_t30_rnn11/"
 #path_results    = "results/train_esm2_t30_rnn12/" # plotgradients, evaluated each 100 optimization steps, plot gradients each 100 optimization spteps. Se agrego gradient accumulation steps 64
 #path_model      = "models/train_esm2_t30_rnn12/"
-path_results    = "results/train_tape_rnn_acc_steps_30_epochs/" 
-path_model      = "models/train_tape_rnn_acc_steps_30_epochs/"
+path_results    = "results/train_esm2_t33_rnn_freeze_acc_steps/" 
+path_model      = "models/train_esm2_t33_rnn_freeze_acc_steps/"
 
 
 #path_results    = "results/train_esm2_t6_rnn2/" # con trainner plot gradients, todo bien :) 
@@ -63,11 +63,11 @@ path_model      = "models/train_tape_rnn_acc_steps_30_epochs/"
 
 
 # el modelo preentrenado
-model_name = "bert-base"   # TAPE                   # train 1, 2, 3, 4
+#model_name = "bert-base"   # TAPE                   # train 1, 2, 3, 4
 #model_name = "pre_trained_models/esm2_t6_8M_UR50D"          # train 1, 2, 3, 4
 #model_name = "pre_trained_models/esm2_t12_35M_UR50D" 
 #model_name = "pre_trained_models/esm2_t30_150M_UR50D"
-#model_name = "pre_trained_models/esm2_t33_650M_UR50D"       # 
+model_name = "pre_trained_models/esm2_t33_650M_UR50D"       # 
 #model_name = "pre_trained_models/prot_bert_bfd"
 #################################################################################
 #################################################################################
@@ -100,15 +100,15 @@ config.cnn_dropout = 0.1
 #################################################################################
 #################################################################################
 #model_ = TapeLinear.from_pretrained(model_name, config=config)
-model_ = TapeRnn.from_pretrained(model_name, config=config)
+#model_ = TapeRnn.from_pretrained(model_name, config=config)
 #model_ = TapeRnnAtt.from_pretrained(model_name, config=config)
 #model_ = BertLinear.from_pretrained(model_name, config=config)
-#model_ = BertRnn.from_pretrained(model_name, config=config)
+model_ = BertRnn.from_pretrained(model_name, config=config)
 #model_ = BertRnnSigmoid.from_pretrained(model_name, config=config)
 
 # freeze bert layers
-#for param in model_.bert.parameters():
-#    param.requires_grad = False
+for param in model_.bert.parameters():
+    param.requires_grad = False
     
 #################################################################################
 #################################################################################
@@ -125,7 +125,7 @@ model_ = TapeRnn.from_pretrained(model_name, config=config)
 ############ hyperparameters ####################################################
 
 num_samples = len(trainset)
-num_epochs = 30
+num_epochs = 3
 batch_size = 16  # segun hlab, se obtienen mejoes resutlados
 num_training_steps = num_epochs * num_samples
 
@@ -147,7 +147,8 @@ training_args = TrainingArguments(
         #debug="debug underflow_overflow"
     
         # cambios para tratar de evitar vanish gradients
-        gradient_accumulation_steps = 64,  # total number of steps before back propagation
+        #gradient_accumulation_steps = 64,  # total number of steps before back propagation
+        gradient_accumulation_steps = 128,  # total number of steps before back propagation
         #gradient_accumulation_steps = 200,  # total number of steps before back propagation
         #fp16                        = True,  # Use mixed precision
         #fp16_opt_level              = "02",  # mixed precision mode
