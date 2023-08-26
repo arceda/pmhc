@@ -64,9 +64,10 @@ esm2_t33_rnn_acc_steps/checkpoint-1578
 {'test_loss': 0.6932169795036316, 'test_auc': 0.5000115647045218, 'test_precision': 0.49896278784086034, 'test_recall': 1.0, 'test_f1': 0.6657440623453736, 'test_sn': 0.49896278784086034, 'test_sp': 2.3129409043598938e-05, 'test_accuracy': 0.4989685942751188, 'test_mcc': 0.003397162701064777, 'test_runtime': 2111.2479, 'test_samples_per_second': 81.743, 'test_steps_per_second': 10.218}
 # esm2_t33_rnn_freeze
 {'test_loss': 0.5901898741722107, 'test_auc': 0.6816097413302891, 'test_precision': 0.7139173136539464, 'test_recall': 0.604412960167228, 'test_f1': 0.6546172615903203, 'test_sn': 0.7139173136539464, 'test_sp': 0.7588065224933503, 'test_accuracy': 0.6817707729748522, 'test_mcc': 0.36767091882002206, 'test_runtime': 2423.9286, 'test_samples_per_second': 71.198, 'test_steps_per_second': 8.9}
+train_esm2_t33_rnn_acc_steps/checkpoint-600 acc_steps 128
+{'test_loss': 0.6117944121360779, 'test_auc': 0.6770544826512443, 'test_precision': 0.631234902466688, 'test_recall': 0.8466728602949716, 'test_f1': 0.7232514421479199, 'test_sn': 0.631234902466688, 'test_sp': 0.507436105007517, 'test_accuracy': 0.6767006605632171, 'test_mcc': 0.37632368084434376, 'test_runtime': 1891.6856, 'test_samples_per_second': 91.231, 'test_steps_per_second': 11.404}
 train_esm2_t33_rnn_freeze_acc_steps/checkpoint-526
 {'test_loss': 0.6027397513389587, 'test_auc': 0.6742209567944331, 'test_precision': 0.6254469882457867, 'test_recall': 0.8632563000812914, 'test_f1': 0.7253575070379242, 'test_sn': 0.6254469882457867, 'test_sp': 0.4851856135075749, 'test_accuracy': 0.673826631127593, 'test_mcc': 0.3762565901603683, 'test_runtime': 1679.1981, 'test_samples_per_second': 102.775, 'test_steps_per_second': 12.847}
-
 
 # protbert_bfd_rnn_freeze
 {'test_loss': 0.2328050285577774, 'test_auc': 0.9082794628642646, 'test_precision': 0.9175528438862683, 'test_recall': 0.8968064104052955, 'test_f1': 0.9070610137837474, 'test_sn': 0.9175528438862683, 'test_sp': 0.9197525153232335, 'test_accuracy': 0.9083033955267122, 'test_mcc': 0.8168053301955162, 'test_runtime': 1767.8983, 'test_samples_per_second': 97.619, 'test_steps_per_second': 12.203}
