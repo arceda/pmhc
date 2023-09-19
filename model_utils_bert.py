@@ -265,6 +265,7 @@ class BertRnn(BertPreTrainedModel):
         batch_size = input_ids.shape[0]
         token_type_ids = None
 
+        #print(input_ids.shape) #[batch_size, max_length] = [16, 50]
         bert_out = self.bert(
             input_ids,
             attention_mask=attention_mask,

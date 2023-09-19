@@ -64,10 +64,10 @@ path_model      = "models/train_esm2_t33_rnn_freeze_acc_steps/"
 
 # el modelo preentrenado
 #model_name = "bert-base"   # TAPE                   # train 1, 2, 3, 4
-#model_name = "pre_trained_models/esm2_t6_8M_UR50D"          # train 1, 2, 3, 4
+model_name = "pre_trained_models/esm2_t6_8M_UR50D"          # train 1, 2, 3, 4
 #model_name = "pre_trained_models/esm2_t12_35M_UR50D" 
 #model_name = "pre_trained_models/esm2_t30_150M_UR50D"
-model_name = "pre_trained_models/esm2_t33_650M_UR50D"       # 
+#model_name = "pre_trained_models/esm2_t33_650M_UR50D"       # 
 #model_name = "pre_trained_models/prot_bert_bfd"
 #################################################################################
 #################################################################################
@@ -107,8 +107,8 @@ model_ = BertRnn.from_pretrained(model_name, config=config)
 #model_ = BertRnnSigmoid.from_pretrained(model_name, config=config)
 
 # freeze bert layers
-for param in model_.bert.parameters():
-    param.requires_grad = False
+#for param in model_.bert.parameters():
+#    param.requires_grad = False
     
 #################################################################################
 #################################################################################
