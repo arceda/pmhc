@@ -7,5 +7,6 @@ netMHCpan-4.1/data/*
 tmp_peptides.pep
 tmp_results.xls
 tmp_results.txt
-
 plots_esm2_t30_rnn11/*
+state-of-art/Anthem/temp_peptide_file.txt
+state-of-art/Anthem/prediction_anthem.csv
