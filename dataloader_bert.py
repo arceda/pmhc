@@ -46,7 +46,7 @@ class DataSetLoaderBERT(Dataset):
         X_test = X_test.tolist()
         X_test = [' '.join(eachseq) for eachseq in X_test]
         X_test = [" ".join(eachseq) for eachseq in X_test]  # ['Y D S E Y R N I F T N T D E S N L Y L S Y N Y Y T W A V D A Y T W Y H M M V I F R L M',.....,'Y D S E Y R N I F T N T D E S N L Y L S Y N Y Y T W A V D A Y T W Y N F L I K F L L I']
-
+        #print(X_test, y_label)
         return (X_test, y_label)
 
     def __len__(self):

@@ -10,3 +10,5 @@ tmp_results.txt
 plots_esm2_t30_rnn11/*
 state-of-art/Anthem/temp_peptide_file.txt
 state-of-art/Anthem/prediction_anthem.csv
+pre_trained_models/esm2_t6_8M_UR50D
+pre_trained_models/esm2_t6_8M_UR50D

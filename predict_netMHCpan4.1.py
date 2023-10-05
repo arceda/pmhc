@@ -44,7 +44,7 @@ for index, row in data.iterrows():
     pep.write(row['peptide'])
     pep.close()
     
-    cmd = "tcsh netMHCpan-4.1/netMHCpan.sh -a " + row['HLA'].replace("*", "") + " -p tmp_peptides.pep -hlapseudo /home/vicente/projects/pmhc/dataset/hlab/MHC_pseudo.dat > tmp_results.txt"
+    cmd = "state-of-art/netMHCpan-4.1/netMHCpan -a " + row['HLA'].replace("*", "") + " -p tmp_peptides.pep -hlapseudo /home/vicente/projects/pmhc/dataset/hlab/MHC_pseudo.dat > tmp_results.txt"
     #print(cmd)
     os.system(cmd)
 
@@ -66,16 +66,18 @@ for index, row in data.iterrows():
     cols_data = row_data.split(" ")
  
     if cols_data[-1].strip() == "SB" or cols_data[-1].strip() == "WB" :
-        el_rank = [cols_data[1], cols_data[2], cols_data[-3], cols_data[-1].strip(), 1]
+        el_rank = [cols_data[1], cols_data[2], cols_data[-4].strip(), cols_data[-3], cols_data[-1].strip(), 1]
     else:
-        el_rank = [cols_data[1], cols_data[2], cols_data[-1].replace("\n", ""), "-", 0]
+        el_rank = [cols_data[1], cols_data[2], cols_data[-2].strip(), cols_data[-1].replace("\n", ""), "-", 0]
 
     final_data_results.append(el_rank)
   
     if index%1000 == 0:
         print("index", index)
 
+    
 
-df = pd.DataFrame(np.array(final_data_results), columns = ['mhc', 'peptide', 'rank','ligand', 'prediction'])
+
+df = pd.DataFrame(np.array(final_data_results), columns = ['mhc', 'peptide', 'prob', 'rank','ligand', 'prediction'])
 df.to_csv("predictions_netmhcpan4.1.csv")
 print(df)

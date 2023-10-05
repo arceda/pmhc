@@ -54,8 +54,10 @@ model_type = "bert" # EM1, ESM2, PortBert
 #path_model      = "models/train_esm2_t30_rnn11/"
 #path_results    = "results/train_esm2_t30_rnn12/" # plotgradients, evaluated each 100 optimization steps, plot gradients each 100 optimization spteps. Se agrego gradient accumulation steps 64
 #path_model      = "models/train_esm2_t30_rnn12/"
-path_results    = "results/train_esm2_t33_rnn_freeze_acc_steps/" 
-path_model      = "models/train_esm2_t33_rnn_freeze_acc_steps/"
+#path_results    = "results/train_esm2_t33_rnn_freeze_acc_steps/" 
+#path_model      = "models/train_esm2_t33_rnn_freeze_acc_steps/"
+path_results    = "results/tmp/" 
+path_model      = "models/tmp/"
 
 
 #path_results    = "results/train_esm2_t6_rnn2/" # con trainner plot gradients, todo bien :) 
@@ -107,8 +109,8 @@ model_ = BertRnn.from_pretrained(model_name, config=config)
 #model_ = BertRnnSigmoid.from_pretrained(model_name, config=config)
 
 # freeze bert layers
-#for param in model_.bert.parameters():
-#    param.requires_grad = False
+for param in model_.bert.parameters():
+    param.requires_grad = False
     
 #################################################################################
 #################################################################################
@@ -148,7 +150,7 @@ training_args = TrainingArguments(
     
         # cambios para tratar de evitar vanish gradients
         #gradient_accumulation_steps = 64,  # total number of steps before back propagation
-        gradient_accumulation_steps = 128,  # total number of steps before back propagation
+        #gradient_accumulation_steps = 128,  # total number of steps before back propagation
         #gradient_accumulation_steps = 200,  # total number of steps before back propagation
         #fp16                        = True,  # Use mixed precision
         #fp16_opt_level              = "02",  # mixed precision mode
