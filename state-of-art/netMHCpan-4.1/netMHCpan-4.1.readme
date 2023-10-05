@@ -1,8 +1,9 @@
 
 # para ejecutar:
-tcsh ../netMHCpan.sh -hlaseq B0702.fsa -p test.pep > test.pep_userMHC.myou
-tcsh ../netMHCpan.sh -a HLA-A01:01 -p tmp_peptides.pep -hlapseudo /home/vicente/projects/pmhc/dataset/hlab/MHC_pseudo.dat > result.pep_userMHC.myou
+../netMHCpan -hlaseq B0702.fsa -p test.pep > test.pep_userMHC.myou
+../netMHCpan -a HLA-A01:01 -p tmp_peptides.pep -hlapseudo /home/vicente/projects/pmhc/dataset/hlab/MHC_pseudo.dat > result.pep_userMHC.myou
 
+# es importante no cambiar los permisos a las carpetas
 
    NetMHCpan 4.1              INSTALLATION INSTRUCTIONS
 

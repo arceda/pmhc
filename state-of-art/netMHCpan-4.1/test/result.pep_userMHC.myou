@@ -1,18 +1,17 @@
-testing
-# /home/vicente/projects/pmhc/netMHCpan-4.1/Linux_x86_64/bin/netMHCpan -a HLA-A01:01 -p tmp_peptides.pep -hlapseudo /home/vicente/projects/pmhc/dataset/hlab/MHC_pseudo.dat
-# Thu Jun  8 22:04:48 2023
+# /home/vicente/projects/pmhc/state-of-art/netMHCpan-4.1/Linux_x86_64/bin/netMHCpan -a HLA-A01:01 -p tmp_peptides.pep -hlapseudo /home/vicente/projects/pmhc/dataset/hlab/MHC_pseudo.dat
+# Wed Oct  4 18:16:34 2023
 # User: vicente
-# PWD : /home/vicente/projects/pmhc/netMHCpan-4.1/test
-# Host: Linux vicente-desktop 5.15.0-73-generic x86_64
+# PWD : /home/vicente/projects/pmhc/state-of-art/netMHCpan-4.1/test
+# Host: Linux vicente-desktop 6.2.0-32-generic x86_64
 # -a       HLA-A01:01           MHC allele
 # -p       1                    Use peptide input
 # -hlapseudo /home/vicente/projects/pmhc/dataset/hlab/MHC_pseudo.dat File with MHC pseudo sequences
 # Command line parameters set to:
-#	[-rdir filename]     /home/vicente/projects/pmhc/netMHCpan-4.1/Linux_x86_64 Home directory for NetMHpan
-#	[-syn filename]      /home/vicente/projects/pmhc/netMHCpan-4.1/Linux_x86_64/data/synlist.bin Synaps file
+#	[-rdir filename]     /home/vicente/projects/pmhc/state-of-art/netMHCpan-4.1/Linux_x86_64 Home directory for NetMHpan
+#	[-syn filename]      /home/vicente/projects/pmhc/state-of-art/netMHCpan-4.1/Linux_x86_64/data/synlist.bin Synaps file
 #	[-v]                 0                    Verbose mode
 #	[-dirty]             0                    Dirty mode, leave tmp dir+files
-#	[-tdir filename]     /home/vicente/projects/pmhc/netMHCpan-4.1/tmp/netMHCpanXXXXXX Temporary directory (made with mkdtemp)
+#	[-tdir filename]     /home/vicente/projects/pmhc/state-of-art/netMHCpan-4.1/tmp/netMHCpanXXXXXX Temporary directory (made with mkdtemp)
 #	[-hlapseudo filename] /home/vicente/projects/pmhc/dataset/hlab/MHC_pseudo.dat File with MHC pseudo sequences
 #	[-hlaseq filename]                        File with full length MHC sequences
 #	[-a line]            HLA-A01:01           MHC allele
@@ -26,17 +25,17 @@ testing
 #	[-xls]               0                    Save output to xls file
 #	[-xlsfile filename]  NetMHCpan_out.xls    Filename for xls dump
 #	[-t float]           -99.900002           Threshold for output (%rank) [<0 print all]
-#	[-thrfmt filename]   /home/vicente/projects/pmhc/netMHCpan-4.1/Linux_x86_64/data/threshold/%s.thr.%s Format for threshold filenames
+#	[-thrfmt filename]   /home/vicente/projects/pmhc/state-of-art/netMHCpan-4.1/Linux_x86_64/data/threshold/%s.thr.%s Format for threshold filenames
 #	[-expfix]            0                    Exclude prefix from synlist
-#	[-version filename]  /home/vicente/projects/pmhc/netMHCpan-4.1/Linux_x86_64/data/version File with version information
+#	[-version filename]  /home/vicente/projects/pmhc/state-of-art/netMHCpan-4.1/Linux_x86_64/data/version File with version information
 #	[-inptype int]       0                    Input type [0] FASTA [1] Peptide
 #	[-listMHC]           0                    Print list of alleles included in netMHCpan
-#	[-allname filename]  /home/vicente/projects/pmhc/netMHCpan-4.1/Linux_x86_64/data/allelenames File with print names for alleles
+#	[-allname filename]  /home/vicente/projects/pmhc/state-of-art/netMHCpan-4.1/Linux_x86_64/data/allelenames File with print names for alleles
 #	[-BA]                0                    Include Binding affinity prediction
 
 # NetMHCpan version 4.1b
 
-# Tmpdir made /home/vicente/projects/pmhc/netMHCpan-4.1/tmp/netMHCpanZcH47O
+# Tmpdir made /home/vicente/projects/pmhc/state-of-art/netMHCpan-4.1/tmp/netMHCpan1hQBwp
 # Input is in PEPTIDE format
 
 # Make EL predictions
