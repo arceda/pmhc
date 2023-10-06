@@ -81,5 +81,5 @@ for i, df_by_kmer in enumerate(data_grouped): # itereamos por cada k-mer
     
 
 final_results = final_results.sort_values('id')
-final_results.to_csv("prediction_acme.csv", index=False)
+final_results.to_csv("prediction_acme_full.csv", index=False)
 print("finish :)")
