@@ -1,0 +1,291 @@
+# /usr/cbs/packages/netMHCstabpan/1.0//Linux_x86_64/bin/netMHCstabpan test.fsa -affpred /usr/cbs/bio/src/netMHCpan-2.8/netMHCpan
+# Wed Jun 22 20:54:34 2016
+# User: fenoy
+# PWD : /usr/cbs/packages/netMHCstabpan/1.0/test
+# Host: Linux padawan 2.6.37.6-0.11-desktop x86_64
+# -affpred /usr/cbs/bio/src/netMHCpan-2.8/netMHCpan MHC affinity predictor
+# Command line parameters set to:
+#	[-rdir filename]     /usr/cbs/packages/netMHCstabpan/1.0//Linux_x86_64 Home directory for NetMHpan
+#	[-syn filename]      /usr/cbs/packages/netMHCstabpan/1.0//Linux_x86_64/data/syn/synaps Synaps file
+#	[-v]                 0                    Verbose mode
+#	[-dirty]             0                    Dirty mode, leave tmp dir+files
+#	[-tdir filename]     /scratch             Temporary directory (Default $$)
+#	[-hlapseudo filename] /usr/cbs/packages/netMHCstabpan/1.0//Linux_x86_64/data/MHC_pseudo.dat File with HLA pseudo sequences
+#	[-hlaseq filename]                        File with full length HLA sequences
+#	[-a line]            HLA-A02:01           HLA allele
+#	[-f filename]                             File name with input
+#	[-w]                 0                    w option for webface
+#	[-s int]             -1                   Sort output on descending [0] stability, [1] affinity, [2] combined, [-1] no sorting
+#	[-p]                 0                    Use peptide input
+#	[-rht float]         0.500000             Rank Threshold for high binding peptides
+#	[-rlt float]         2.000000             Rank Threshold for low binding peptides
+#	[-l string]          9                    Peptide length [8-11] (multiple length with ,)
+#	[-xls]               0                    Save output to xls file
+#	[-xlsfile filename]  NetMHCstabpan.xls    Filename for xls dump
+#	[-t float]           -99.900002           Threshold for output
+#	[-thrfmt filename]   /usr/cbs/packages/netMHCstabpan/1.0//Linux_x86_64/data/threshold/%s.thr Format for threshold filenames
+#	[-expfix]            0                    Exclude prefix from synlist
+#	[-version filename]  /usr/cbs/packages/netMHCstabpan/1.0//Linux_x86_64/data/version File with version information
+#	[-inptype int]       0                    Input type [0] FASTA [1] Peptide
+#	[-listMHC]           0                    Print list of alleles included in netMHCpan
+#	[-affpred filename]  /usr/cbs/bio/src/netMHCpan-2.8/netMHCpan MHC affinity predictor
+#	[-waff float]        0.800000             Relative Weight on affinity
+#	[-ia]                0                    Include affinity predictions
+#	[-s1 int]            -1                   Sort option only used by www
+#	[-s2 int]            -1                   Sort option only used by www
+
+# NetMHCstabpan version 1.0
+
+# Input is in FSA format
+
+# Peptide length 9
+
+HLA-A02:01 : Distance to traning data  0.000 (using nearest neighbor HLA-A02:01)
+
+# Rank Threshold for Strong binding peptides   0.500
+# Rank Threshold for Weak binding peptides   2.000
+-----------------------------------------------------------------------------------------------------
+ pos      HLA         peptide         Identity       Pred     Thalf(h) %Rank_Stab BindLevel
+-----------------------------------------------------------------------------------------------------
+    0  HLA-A*02:01    TMDKSELVQ 143B_BOVIN_P293      0.001       0.09      75.00
+    1  HLA-A*02:01    MDKSELVQK 143B_BOVIN_P293      0.000       0.08      75.00
+    2  HLA-A*02:01    DKSELVQKA 143B_BOVIN_P293      0.002       0.11      60.00
+    3  HLA-A*02:01    KSELVQKAK 143B_BOVIN_P293      0.000       0.08      75.00
+    4  HLA-A*02:01    SELVQKAKL 143B_BOVIN_P293      0.025       0.19      31.00
+    5  HLA-A*02:01    ELVQKAKLA 143B_BOVIN_P293      0.049       0.23      23.00
+    6  HLA-A*02:01    LVQKAKLAE 143B_BOVIN_P293      0.001       0.10      65.00
+    7  HLA-A*02:01    VQKAKLAEQ 143B_BOVIN_P293      0.001       0.11      65.00
+    8  HLA-A*02:01    QKAKLAEQA 143B_BOVIN_P293      0.004       0.13      55.00
+    9  HLA-A*02:01    KAKLAEQAE 143B_BOVIN_P293      0.000       0.07      75.00
+   10  HLA-A*02:01    AKLAEQAER 143B_BOVIN_P293      0.002       0.11      65.00
+   11  HLA-A*02:01    KLAEQAERY 143B_BOVIN_P293      0.172       0.39      12.00
+   12  HLA-A*02:01    LAEQAERYD 143B_BOVIN_P293      0.000       0.06      75.00
+   13  HLA-A*02:01    AEQAERYDD 143B_BOVIN_P293      0.000       0.07      75.00
+   14  HLA-A*02:01    EQAERYDDM 143B_BOVIN_P293      0.006       0.14      45.00
+   15  HLA-A*02:01    QAERYDDMA 143B_BOVIN_P293      0.003       0.12      55.00
+   16  HLA-A*02:01    AERYDDMAA 143B_BOVIN_P293      0.007       0.14      44.00
+   17  HLA-A*02:01    ERYDDMAAA 143B_BOVIN_P293      0.015       0.17      36.00
+   18  HLA-A*02:01    RYDDMAAAM 143B_BOVIN_P293      0.065       0.25      21.00
+   19  HLA-A*02:01    YDDMAAAMK 143B_BOVIN_P293      0.000       0.08      75.00
+   20  HLA-A*02:01    DDMAAAMKA 143B_BOVIN_P293      0.001       0.10      75.00
+   21  HLA-A*02:01    DMAAAMKAV 143B_BOVIN_P293      0.186       0.41      12.00
+   22  HLA-A*02:01    MAAAMKAVT 143B_BOVIN_P293      0.019       0.18      33.00
+   23  HLA-A*02:01    AAAMKAVTE 143B_BOVIN_P293      0.000       0.08      75.00
+   24  HLA-A*02:01    AAMKAVTEQ 143B_BOVIN_P293      0.005       0.13      50.00
+   25  HLA-A*02:01    AMKAVTEQG 143B_BOVIN_P293      0.014       0.16      37.00
+   26  HLA-A*02:01    MKAVTEQGH 143B_BOVIN_P293      0.001       0.10      75.00
+   27  HLA-A*02:01    KAVTEQGHE 143B_BOVIN_P293      0.000       0.08      75.00
+   28  HLA-A*02:01    AVTEQGHEL 143B_BOVIN_P293      0.337       0.64       7.00
+   29  HLA-A*02:01    VTEQGHELS 143B_BOVIN_P293      0.001       0.10      75.00
+   30  HLA-A*02:01    TEQGHELSN 143B_BOVIN_P293      0.000       0.08      75.00
+   31  HLA-A*02:01    EQGHELSNE 143B_BOVIN_P293      0.000       0.07      75.00
+   32  HLA-A*02:01    QGHELSNEE 143B_BOVIN_P293      0.000       0.07      75.00
+   33  HLA-A*02:01    GHELSNEER 143B_BOVIN_P293      0.000       0.08      75.00
+   34  HLA-A*02:01    HELSNEERN 143B_BOVIN_P293      0.000       0.08      75.00
+   35  HLA-A*02:01    ELSNEERNL 143B_BOVIN_P293      0.020       0.18      33.00
+   36  HLA-A*02:01    LSNEERNLL 143B_BOVIN_P293      0.022       0.18      31.00
+   37  HLA-A*02:01    SNEERNLLS 143B_BOVIN_P293      0.000       0.08      75.00
+   38  HLA-A*02:01    NEERNLLSV 143B_BOVIN_P293      0.025       0.19      31.00
+   39  HLA-A*02:01    EERNLLSVA 143B_BOVIN_P293      0.006       0.13      47.00
+   40  HLA-A*02:01    ERNLLSVAY 143B_BOVIN_P293      0.001       0.09      75.00
+   41  HLA-A*02:01    RNLLSVAYK 143B_BOVIN_P293      0.005       0.13      50.00
+   42  HLA-A*02:01    NLLSVAYKN 143B_BOVIN_P293      0.007       0.14      44.00
+   43  HLA-A*02:01    LLSVAYKNV 143B_BOVIN_P293      0.483       0.95       4.50
+   44  HLA-A*02:01    LSVAYKNVV 143B_BOVIN_P293      0.111       0.31      16.00
+   45  HLA-A*02:01    SVAYKNVVG 143B_BOVIN_P293      0.006       0.14      45.00
+   46  HLA-A*02:01    VAYKNVVGA 143B_BOVIN_P293      0.378       0.71       6.50
+   47  HLA-A*02:01    AYKNVVGAR 143B_BOVIN_P293      0.004       0.13      50.00
+   48  HLA-A*02:01    YKNVVGARR 143B_BOVIN_P293      0.002       0.11      60.00
+   49  HLA-A*02:01    KNVVGARRS 143B_BOVIN_P293      0.000       0.08      75.00
+   50  HLA-A*02:01    NVVGARRSS 143B_BOVIN_P293      0.001       0.10      65.00
+   51  HLA-A*02:01    VVGARRSSW 143B_BOVIN_P293      0.010       0.15      41.00
+   52  HLA-A*02:01    VGARRSSWR 143B_BOVIN_P293      0.000       0.09      75.00
+   53  HLA-A*02:01    GARRSSWRV 143B_BOVIN_P293      0.055       0.24      22.00
+   54  HLA-A*02:01    ARRSSWRVI 143B_BOVIN_P293      0.001       0.09      75.00
+   55  HLA-A*02:01    RRSSWRVIS 143B_BOVIN_P293      0.003       0.12      60.00
+   56  HLA-A*02:01    RSSWRVISS 143B_BOVIN_P293      0.015       0.16      36.00
+   57  HLA-A*02:01    SSWRVISSI 143B_BOVIN_P293      0.222       0.46      10.00
+   58  HLA-A*02:01    SWRVISSIE 143B_BOVIN_P293      0.000       0.06      75.00
+   59  HLA-A*02:01    WRVISSIEQ 143B_BOVIN_P293      0.000       0.07      75.00
+   60  HLA-A*02:01    RVISSIEQK 143B_BOVIN_P293      0.037       0.21      26.00
+   61  HLA-A*02:01    VISSIEQKT 143B_BOVIN_P293      0.051       0.23      23.00
+   62  HLA-A*02:01    ISSIEQKTE 143B_BOVIN_P293      0.000       0.06      75.00
+   63  HLA-A*02:01    SSIEQKTER 143B_BOVIN_P293      0.005       0.13      50.00
+   64  HLA-A*02:01    SIEQKTERN 143B_BOVIN_P293      0.000       0.08      75.00
+   65  HLA-A*02:01    IEQKTERNE 143B_BOVIN_P293      0.000       0.06      75.00
+   66  HLA-A*02:01    EQKTERNEK 143B_BOVIN_P293      0.000       0.09      75.00
+   67  HLA-A*02:01    QKTERNEKK 143B_BOVIN_P293      0.000       0.09      75.00
+   68  HLA-A*02:01    KTERNEKKQ 143B_BOVIN_P293      0.000       0.07      75.00
+   69  HLA-A*02:01    TERNEKKQQ 143B_BOVIN_P293      0.000       0.05      75.00
+   70  HLA-A*02:01    ERNEKKQQM 143B_BOVIN_P293      0.001       0.10      75.00
+   71  HLA-A*02:01    RNEKKQQMG 143B_BOVIN_P293      0.000       0.07      75.00
+   72  HLA-A*02:01    NEKKQQMGK 143B_BOVIN_P293      0.000       0.09      75.00
+   73  HLA-A*02:01    EKKQQMGKE 143B_BOVIN_P293      0.000       0.06      75.00
+   74  HLA-A*02:01    KKQQMGKEY 143B_BOVIN_P293      0.001       0.10      75.00
+   75  HLA-A*02:01    KQQMGKEYR 143B_BOVIN_P293      0.018       0.17      34.00
+   76  HLA-A*02:01    QQMGKEYRE 143B_BOVIN_P293      0.001       0.10      65.00
+   77  HLA-A*02:01    QMGKEYREK 143B_BOVIN_P293      0.001       0.11      65.00
+   78  HLA-A*02:01    MGKEYREKI 143B_BOVIN_P293      0.003       0.12      60.00
+   79  HLA-A*02:01    GKEYREKIE 143B_BOVIN_P293      0.000       0.05      75.00
+   80  HLA-A*02:01    KEYREKIEA 143B_BOVIN_P293      0.059       0.24      22.00
+   81  HLA-A*02:01    EYREKIEAE 143B_BOVIN_P293      0.000       0.07      75.00
+   82  HLA-A*02:01    YREKIEAEL 143B_BOVIN_P293      0.012       0.16      38.00
+   83  HLA-A*02:01    REKIEAELQ 143B_BOVIN_P293      0.000       0.07      75.00
+   84  HLA-A*02:01    EKIEAELQD 143B_BOVIN_P293      0.000       0.07      75.00
+   85  HLA-A*02:01    KIEAELQDI 143B_BOVIN_P293      0.124       0.33      15.00
+   86  HLA-A*02:01    IEAELQDIC 143B_BOVIN_P293      0.013       0.16      38.00
+   87  HLA-A*02:01    EAELQDICN 143B_BOVIN_P293      0.000       0.06      75.00
+   88  HLA-A*02:01    AELQDICND 143B_BOVIN_P293      0.001       0.10      75.00
+   89  HLA-A*02:01    ELQDICNDV 143B_BOVIN_P293      0.387       0.73       6.00
+   90  HLA-A*02:01    LQDICNDVL 143B_BOVIN_P293      0.062       0.25      21.00
+   91  HLA-A*02:01    QDICNDVLQ 143B_BOVIN_P293      0.000       0.07      75.00
+   92  HLA-A*02:01    DICNDVLQL 143B_BOVIN_P293      0.038       0.21      26.00
+   93  HLA-A*02:01    ICNDVLQLL 143B_BOVIN_P293      0.387       0.73       6.00
+   94  HLA-A*02:01    CNDVLQLLD 143B_BOVIN_P293      0.000       0.07      75.00
+   95  HLA-A*02:01    NDVLQLLDK 143B_BOVIN_P293      0.000       0.07      75.00
+   96  HLA-A*02:01    DVLQLLDKY 143B_BOVIN_P293      0.005       0.13      50.00
+   97  HLA-A*02:01    VLQLLDKYL 143B_BOVIN_P293      0.334       0.63       7.00
+   98  HLA-A*02:01    LQLLDKYLI 143B_BOVIN_P293      0.401       0.76       6.00
+   99  HLA-A*02:01    QLLDKYLIP 143B_BOVIN_P293      0.038       0.21      26.00
+  100  HLA-A*02:01    LLDKYLIPN 143B_BOVIN_P293      0.065       0.25      21.00
+  101  HLA-A*02:01    LDKYLIPNA 143B_BOVIN_P293      0.002       0.12      60.00
+  102  HLA-A*02:01    DKYLIPNAT 143B_BOVIN_P293      0.001       0.09      75.00
+  103  HLA-A*02:01    KYLIPNATQ 143B_BOVIN_P293      0.001       0.10      75.00
+  104  HLA-A*02:01    YLIPNATQP 143B_BOVIN_P293      0.198       0.43      11.00
+  105  HLA-A*02:01    LIPNATQPE 143B_BOVIN_P293      0.004       0.13      50.00
+  106  HLA-A*02:01    IPNATQPES 143B_BOVIN_P293      0.001       0.10      75.00
+  107  HLA-A*02:01    PNATQPESK 143B_BOVIN_P293      0.000       0.07      75.00
+  108  HLA-A*02:01    NATQPESKV 143B_BOVIN_P293      0.026       0.19      30.00
+  109  HLA-A*02:01    ATQPESKVF 143B_BOVIN_P293      0.010       0.15      41.00
+  110  HLA-A*02:01    TQPESKVFY 143B_BOVIN_P293      0.029       0.20      29.00
+  111  HLA-A*02:01    QPESKVFYL 143B_BOVIN_P293      0.010       0.15      41.00
+  112  HLA-A*02:01    PESKVFYLK 143B_BOVIN_P293      0.002       0.11      65.00
+  113  HLA-A*02:01    ESKVFYLKM 143B_BOVIN_P293      0.002       0.11      65.00
+  114  HLA-A*02:01    SKVFYLKMK 143B_BOVIN_P293      0.001       0.10      75.00
+  115  HLA-A*02:01    KVFYLKMKG 143B_BOVIN_P293      0.040       0.21      26.00
+  116  HLA-A*02:01    VFYLKMKGD 143B_BOVIN_P293      0.000       0.07      75.00
+  117  HLA-A*02:01    FYLKMKGDY 143B_BOVIN_P293      0.003       0.12      55.00
+  118  HLA-A*02:01    YLKMKGDYF 143B_BOVIN_P293      0.103       0.31      17.00
+  119  HLA-A*02:01    LKMKGDYFR 143B_BOVIN_P293      0.015       0.17      36.00
+  120  HLA-A*02:01    KMKGDYFRY 143B_BOVIN_P293      0.069       0.26      20.00
+  121  HLA-A*02:01    MKGDYFRYL 143B_BOVIN_P293      0.059       0.24      22.00
+  122  HLA-A*02:01    KGDYFRYLS 143B_BOVIN_P293      0.001       0.10      75.00
+  123  HLA-A*02:01    GDYFRYLSE 143B_BOVIN_P293      0.000       0.07      75.00
+  124  HLA-A*02:01    DYFRYLSEV 143B_BOVIN_P293      0.127       0.34      15.00
+  125  HLA-A*02:01    YFRYLSEVA 143B_BOVIN_P293      0.027       0.19      29.00
+  126  HLA-A*02:01    FRYLSEVAS 143B_BOVIN_P293      0.002       0.11      65.00
+  127  HLA-A*02:01    RYLSEVASG 143B_BOVIN_P293      0.008       0.14      44.00
+  128  HLA-A*02:01    YLSEVASGD 143B_BOVIN_P293      0.038       0.21      26.00
+  129  HLA-A*02:01    LSEVASGDN 143B_BOVIN_P293      0.000       0.06      75.00
+  130  HLA-A*02:01    SEVASGDNK 143B_BOVIN_P293      0.000       0.08      75.00
+  131  HLA-A*02:01    EVASGDNKQ 143B_BOVIN_P293      0.000       0.08      75.00
+  132  HLA-A*02:01    VASGDNKQT 143B_BOVIN_P293      0.001       0.10      65.00
+  133  HLA-A*02:01    ASGDNKQTT 143B_BOVIN_P293      0.006       0.14      45.00
+  134  HLA-A*02:01    SGDNKQTTV 143B_BOVIN_P293      0.015       0.17      36.00
+  135  HLA-A*02:01    GDNKQTTVS 143B_BOVIN_P293      0.000       0.07      75.00
+  136  HLA-A*02:01    DNKQTTVSN 143B_BOVIN_P293      0.000       0.06      75.00
+  137  HLA-A*02:01    NKQTTVSNS 143B_BOVIN_P293      0.000       0.08      75.00
+  138  HLA-A*02:01    KQTTVSNSQ 143B_BOVIN_P293      0.001       0.10      75.00
+  139  HLA-A*02:01    QTTVSNSQQ 143B_BOVIN_P293      0.000       0.08      75.00
+  140  HLA-A*02:01    TTVSNSQQA 143B_BOVIN_P293      0.050       0.23      23.00
+  141  HLA-A*02:01    TVSNSQQAY 143B_BOVIN_P293      0.028       0.19      29.00
+  142  HLA-A*02:01    VSNSQQAYQ 143B_BOVIN_P293      0.001       0.10      75.00
+  143  HLA-A*02:01    SNSQQAYQE 143B_BOVIN_P293      0.000       0.07      75.00
+  144  HLA-A*02:01    NSQQAYQEA 143B_BOVIN_P293      0.040       0.22      26.00
+  145  HLA-A*02:01    SQQAYQEAF 143B_BOVIN_P293      0.062       0.25      21.00
+  146  HLA-A*02:01    QQAYQEAFE 143B_BOVIN_P293      0.001       0.09      75.00
+  147  HLA-A*02:01    QAYQEAFEI 143B_BOVIN_P293      0.264       0.52       9.00
+  148  HLA-A*02:01    AYQEAFEIS 143B_BOVIN_P293      0.004       0.12      55.00
+  149  HLA-A*02:01    YQEAFEISK 143B_BOVIN_P293      0.009       0.15      42.00
+  150  HLA-A*02:01    QEAFEISKK 143B_BOVIN_P293      0.002       0.11      60.00
+  151  HLA-A*02:01    EAFEISKKE 143B_BOVIN_P293      0.000       0.07      75.00
+  152  HLA-A*02:01    AFEISKKEM 143B_BOVIN_P293      0.000       0.09      75.00
+  153  HLA-A*02:01    FEISKKEMQ 143B_BOVIN_P293      0.001       0.10      65.00
+  154  HLA-A*02:01    EISKKEMQP 143B_BOVIN_P293      0.001       0.09      75.00
+  155  HLA-A*02:01    ISKKEMQPT 143B_BOVIN_P293      0.008       0.14      44.00
+  156  HLA-A*02:01    SKKEMQPTH 143B_BOVIN_P293      0.001       0.10      65.00
+  157  HLA-A*02:01    KKEMQPTHP 143B_BOVIN_P293      0.000       0.07      75.00
+  158  HLA-A*02:01    KEMQPTHPI 143B_BOVIN_P293      0.699       1.93       2.00      <= WB
+  159  HLA-A*02:01    EMQPTHPIR 143B_BOVIN_P293      0.005       0.13      50.00
+  160  HLA-A*02:01    MQPTHPIRL 143B_BOVIN_P293      0.231       0.47      10.00
+  161  HLA-A*02:01    QPTHPIRLG 143B_BOVIN_P293      0.000       0.08      75.00
+  162  HLA-A*02:01    PTHPIRLGL 143B_BOVIN_P293      0.017       0.17      35.00
+  163  HLA-A*02:01    THPIRLGLA 143B_BOVIN_P293      0.001       0.11      65.00
+  164  HLA-A*02:01    HPIRLGLAL 143B_BOVIN_P293      0.023       0.18      31.00
+  165  HLA-A*02:01    PIRLGLALN 143B_BOVIN_P293      0.000       0.08      75.00
+  166  HLA-A*02:01    IRLGLALNF 143B_BOVIN_P293      0.019       0.17      34.00
+  167  HLA-A*02:01    RLGLALNFS 143B_BOVIN_P293      0.105       0.31      17.00
+  168  HLA-A*02:01    LGLALNFSV 143B_BOVIN_P293      0.201       0.43      11.00
+  169  HLA-A*02:01    GLALNFSVF 143B_BOVIN_P293      0.169       0.39      12.00
+  170  HLA-A*02:01    LALNFSVFY 143B_BOVIN_P293      0.067       0.26      20.00
+  171  HLA-A*02:01    ALNFSVFYY 143B_BOVIN_P293      0.337       0.64       7.00
+  172  HLA-A*02:01    LNFSVFYYE 143B_BOVIN_P293      0.001       0.10      65.00
+  173  HLA-A*02:01    NFSVFYYEI 143B_BOVIN_P293      0.135       0.35      14.00
+  174  HLA-A*02:01    FSVFYYEIL 143B_BOVIN_P293      0.077       0.27      19.00
+  175  HLA-A*02:01    SVFYYEILN 143B_BOVIN_P293      0.003       0.12      60.00
+  176  HLA-A*02:01    VFYYEILNS 143B_BOVIN_P293      0.016       0.17      36.00
+  177  HLA-A*02:01    FYYEILNSP 143B_BOVIN_P293      0.046       0.23      24.00
+  178  HLA-A*02:01    YYEILNSPE 143B_BOVIN_P293      0.000       0.08      75.00
+  179  HLA-A*02:01    YEILNSPEK 143B_BOVIN_P293      0.040       0.22      25.00
+  180  HLA-A*02:01    EILNSPEKA 143B_BOVIN_P293      0.037       0.21      26.00
+  181  HLA-A*02:01    ILNSPEKAC 143B_BOVIN_P293      0.115       0.32      16.00
+  182  HLA-A*02:01    LNSPEKACS 143B_BOVIN_P293      0.000       0.09      75.00
+  183  HLA-A*02:01    NSPEKACSL 143B_BOVIN_P293      0.011       0.15      39.00
+  184  HLA-A*02:01    SPEKACSLA 143B_BOVIN_P293      0.002       0.11      60.00
+  185  HLA-A*02:01    PEKACSLAK 143B_BOVIN_P293      0.001       0.09      75.00
+  186  HLA-A*02:01    EKACSLAKT 143B_BOVIN_P293      0.003       0.12      60.00
+  187  HLA-A*02:01    KACSLAKTA 143B_BOVIN_P293      0.041       0.22      25.00
+  188  HLA-A*02:01    ACSLAKTAF 143B_BOVIN_P293      0.009       0.15      42.00
+  189  HLA-A*02:01    CSLAKTAFD 143B_BOVIN_P293      0.000       0.09      75.00
+  190  HLA-A*02:01    SLAKTAFDE 143B_BOVIN_P293      0.002       0.11      60.00
+  191  HLA-A*02:01    LAKTAFDEA 143B_BOVIN_P293      0.016       0.17      36.00
+  192  HLA-A*02:01    AKTAFDEAI 143B_BOVIN_P293      0.050       0.23      23.00
+  193  HLA-A*02:01    KTAFDEAIA 143B_BOVIN_P293      0.043       0.22      25.00
+  194  HLA-A*02:01    TAFDEAIAE 143B_BOVIN_P293      0.000       0.08      75.00
+  195  HLA-A*02:01    AFDEAIAEL 143B_BOVIN_P293      0.296       0.57       8.00
+  196  HLA-A*02:01    FDEAIAELD 143B_BOVIN_P293      0.000       0.06      75.00
+  197  HLA-A*02:01    DEAIAELDT 143B_BOVIN_P293      0.000       0.07      75.00
+  198  HLA-A*02:01    EAIAELDTL 143B_BOVIN_P293      0.019       0.18      33.00
+  199  HLA-A*02:01    AIAELDTLN 143B_BOVIN_P293      0.004       0.13      55.00
+  200  HLA-A*02:01    IAELDTLNE 143B_BOVIN_P293      0.000       0.07      75.00
+  201  HLA-A*02:01    AELDTLNEE 143B_BOVIN_P293      0.001       0.10      75.00
+  202  HLA-A*02:01    ELDTLNEES 143B_BOVIN_P293      0.004       0.13      55.00
+  203  HLA-A*02:01    LDTLNEESY 143B_BOVIN_P293      0.000       0.07      75.00
+  204  HLA-A*02:01    DTLNEESYK 143B_BOVIN_P293      0.001       0.09      75.00
+  205  HLA-A*02:01    TLNEESYKD 143B_BOVIN_P293      0.004       0.13      50.00
+  206  HLA-A*02:01    LNEESYKDS 143B_BOVIN_P293      0.000       0.06      75.00
+  207  HLA-A*02:01    NEESYKDST 143B_BOVIN_P293      0.000       0.08      75.00
+  208  HLA-A*02:01    EESYKDSTL 143B_BOVIN_P293      0.005       0.13      47.00
+  209  HLA-A*02:01    ESYKDSTLI 143B_BOVIN_P293      0.027       0.19      29.00
+  210  HLA-A*02:01    SYKDSTLIM 143B_BOVIN_P293      0.020       0.18      32.00
+  211  HLA-A*02:01    YKDSTLIMQ 143B_BOVIN_P293      0.003       0.12      60.00
+  212  HLA-A*02:01    KDSTLIMQL 143B_BOVIN_P293      0.018       0.17      34.00
+  213  HLA-A*02:01    DSTLIMQLL 143B_BOVIN_P293      0.009       0.15      42.00
+  214  HLA-A*02:01    STLIMQLLR 143B_BOVIN_P293      0.007       0.14      45.00
+  215  HLA-A*02:01    TLIMQLLRD 143B_BOVIN_P293      0.014       0.16      37.00
+  216  HLA-A*02:01    LIMQLLRDN 143B_BOVIN_P293      0.008       0.14      44.00
+  217  HLA-A*02:01    IMQLLRDNL 143B_BOVIN_P293      0.067       0.26      21.00
+  218  HLA-A*02:01    MQLLRDNLT 143B_BOVIN_P293      0.041       0.22      25.00
+  219  HLA-A*02:01    QLLRDNLTL 143B_BOVIN_P293      0.546       1.14       4.00
+  220  HLA-A*02:01    LLRDNLTLW 143B_BOVIN_P293      0.310       0.59       7.50
+  221  HLA-A*02:01    LRDNLTLWT 143B_BOVIN_P293      0.001       0.11      65.00
+  222  HLA-A*02:01    RDNLTLWTS 143B_BOVIN_P293      0.001       0.11      65.00
+  223  HLA-A*02:01    DNLTLWTSE 143B_BOVIN_P293      0.000       0.06      75.00
+  224  HLA-A*02:01    NLTLWTSEN 143B_BOVIN_P293      0.006       0.14      45.00
+  225  HLA-A*02:01    LTLWTSENQ 143B_BOVIN_P293      0.001       0.11      65.00
+  226  HLA-A*02:01    TLWTSENQG 143B_BOVIN_P293      0.008       0.14      44.00
+  227  HLA-A*02:01    LWTSENQGD 143B_BOVIN_P293      0.000       0.08      75.00
+  228  HLA-A*02:01    WTSENQGDE 143B_BOVIN_P293      0.000       0.07      75.00
+  229  HLA-A*02:01    TSENQGDEG 143B_BOVIN_P293      0.000       0.06      75.00
+  230  HLA-A*02:01    SENQGDEGD 143B_BOVIN_P293      0.000       0.08      75.00
+  231  HLA-A*02:01    ENQGDEGDA 143B_BOVIN_P293      0.000       0.07      75.00
+  232  HLA-A*02:01    NQGDEGDAG 143B_BOVIN_P293      0.000       0.08      75.00
+  233  HLA-A*02:01    QGDEGDAGE 143B_BOVIN_P293      0.000       0.07      75.00
+  234  HLA-A*02:01    GDEGDAGEG 143B_BOVIN_P293      0.000       0.05      75.00
+  235  HLA-A*02:01    DEGDAGEGE 143B_BOVIN_P293      0.000       0.05      75.00
+  236  HLA-A*02:01    EGDAGEGEN 143B_BOVIN_P293      0.000       0.06      75.00
+-----------------------------------------------------------------------------------------------------
+
+Protein 143B_BOVIN_P293. Allele HLA-A*02:01. Number of high binders 0. Number of weak binders 1. Number of peptides 237
+
+-----------------------------------------------------------------------------------------------------

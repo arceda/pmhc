@@ -1,0 +1,65 @@
+# /usr/cbs/packages/netMHCstabpan/1.0//Linux_x86_64/bin/netMHCstabpan -ia -p test.pep -affpred /usr/cbs/bio/src/netMHCpan-2.8/netMHCpan
+# Wed Jun 22 20:54:33 2016
+# User: fenoy
+# PWD : /usr/cbs/packages/netMHCstabpan/1.0/test
+# Host: Linux padawan 2.6.37.6-0.11-desktop x86_64
+# -ia      1                    Include affinity predictions
+# -p       1                    Use peptide input
+# -affpred /usr/cbs/bio/src/netMHCpan-2.8/netMHCpan MHC affinity predictor
+# Command line parameters set to:
+#	[-rdir filename]     /usr/cbs/packages/netMHCstabpan/1.0//Linux_x86_64 Home directory for NetMHpan
+#	[-syn filename]      /usr/cbs/packages/netMHCstabpan/1.0//Linux_x86_64/data/syn/synaps Synaps file
+#	[-v]                 0                    Verbose mode
+#	[-dirty]             0                    Dirty mode, leave tmp dir+files
+#	[-tdir filename]     /scratch             Temporary directory (Default $$)
+#	[-hlapseudo filename] /usr/cbs/packages/netMHCstabpan/1.0//Linux_x86_64/data/MHC_pseudo.dat File with HLA pseudo sequences
+#	[-hlaseq filename]                        File with full length HLA sequences
+#	[-a line]            HLA-A02:01           HLA allele
+#	[-f filename]                             File name with input
+#	[-w]                 0                    w option for webface
+#	[-s int]             -1                   Sort output on descending [0] stability, [1] affinity, [2] combined, [-1] no sorting
+#	[-p]                 1                    Use peptide input
+#	[-rht float]         0.500000             Rank Threshold for high binding peptides
+#	[-rlt float]         2.000000             Rank Threshold for low binding peptides
+#	[-l string]          9                    Peptide length [8-11] (multiple length with ,)
+#	[-xls]               0                    Save output to xls file
+#	[-xlsfile filename]  NetMHCstabpan.xls    Filename for xls dump
+#	[-t float]           -99.900002           Threshold for output
+#	[-thrfmt filename]   /usr/cbs/packages/netMHCstabpan/1.0//Linux_x86_64/data/threshold/%s.thr Format for threshold filenames
+#	[-expfix]            0                    Exclude prefix from synlist
+#	[-version filename]  /usr/cbs/packages/netMHCstabpan/1.0//Linux_x86_64/data/version File with version information
+#	[-inptype int]       0                    Input type [0] FASTA [1] Peptide
+#	[-listMHC]           0                    Print list of alleles included in netMHCpan
+#	[-affpred filename]  /usr/cbs/bio/src/netMHCpan-2.8/netMHCpan MHC affinity predictor
+#	[-waff float]        0.800000             Relative Weight on affinity
+#	[-ia]                1                    Include affinity predictions
+#	[-s1 int]            -1                   Sort option only used by www
+#	[-s2 int]            -1                   Sort option only used by www
+
+# NetMHCstabpan version 1.0
+
+# Binding affinity prediction included ( using /usr/cbs/bio/src/netMHCpan-2.8/netMHCpan ) with relative weight 0.800000
+# Input is in PEPTIDE format
+
+HLA-A02:01 : Distance to traning data  0.000 (using nearest neighbor HLA-A02:01)
+
+# Rank Threshold for Strong binding peptides   0.500
+# Rank Threshold for Weak binding peptides   2.000
+-----------------------------------------------------------------------------------------------------
+ pos      HLA         peptide         Identity       Pred     Thalf(h) %Rank_Stab   Exp_stab   1-log50k    Aff(nM)  %Rank_aff   Combined  Combined_%rank BindLevel
+-----------------------------------------------------------------------------------------------------
+    0  HLA-A*02:01    AAAWYLWEV         PEPLIST      0.913       7.61       0.30      0.743      0.827       6.48       0.25      0.844         0.26      <= SB
+    0  HLA-A*02:01    AAGLQDCTM         PEPLIST      0.010       0.15      41.00      0.000      0.037   33357.30      50.00      0.032        47.90
+    0  HLA-A*02:01    AARNIVRRA         PEPLIST      0.020       0.18      33.00      0.000      0.043   31247.73      50.00      0.038        45.33
+    0  HLA-A*02:01    AARPDDPTL         PEPLIST      0.013       0.16      38.00      0.149      0.043   31318.49      50.00      0.037        47.03
+    0  HLA-A*02:01    AASCGGAVF         PEPLIST      0.020       0.18      33.00      0.149      0.058   26604.73      50.00      0.050        45.33
+    0  HLA-A*02:01    AASKQQMLM         PEPLIST      0.067       0.26      21.00      0.000      0.064   25044.12      32.00      0.065        28.97
+    0  HLA-A*02:01    AASSTHRKV         PEPLIST      0.052       0.24      23.00      0.272      0.062   25517.31      32.00      0.060        29.68
+    0  HLA-A*02:01    AEALLADGL         PEPLIST      0.020       0.18      32.00      0.085      0.045   30636.10      50.00      0.040        44.94
+    0  HLA-A*02:01    AEESLSLEA         PEPLIST      0.006       0.14      45.00      0.000      0.030   36047.73      50.00      0.025        48.91
+    0  HLA-A*02:01    AEFGPWQTV         PEPLIST      0.253       0.50       9.00      0.316      0.161    8801.95      15.00      0.179        13.24
+-----------------------------------------------------------------------------------------------------
+
+Protein PEPLIST. Allele HLA-A*02:01. Number of high binders 1. Number of weak binders 0. Number of peptides 10
+
+-----------------------------------------------------------------------------------------------------

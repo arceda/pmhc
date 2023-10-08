@@ -1,0 +1,6 @@
+../netMHCstabpan -p test.pep > MY_test.pep.out
+../netMHCstabpan -ia -p test.pep > MY_test.pep_ia.out
+../netMHCstabpan test.fsa > MY_test.fsa.out
+../netMHCstabpan -ia test.fsa > MY_test.fsa_ia.out
+../netMHCstabpan -hlaseq B0702.fsa -p test.pep > MY_test.pep_userMHC.out
+../netMHCstabpan -hlaseq B0702.fsa -ia -p test.pep > MY_test.pep_userMHC_ia.out

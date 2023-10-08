@@ -1,0 +1,128 @@
+ NetMHCstabpan 1.0	    INSTALLATION INSTRUCTIONS
+
+
+   DESCRIPTION
+   NetMHCstabpan ver. 1.0 predicts binding stability of peptides to any known 
+   MHC class I molecule using artificial neural networks(ANNs). The method is 
+   trained  on  more  than  25,000  quantitative  stability  data covering 75 
+   different  HLA  molecules.  The  user  can  upload full length MHC protein 
+   sequences, and  have  the server  predict MHC restricted peptides from any 
+   given protein of interest.
+   Predictions  can  be  made  for 8-14 mer peptides. Note, that all non 9mer 
+   predictions  are  made  using  approximations.  Most  HLA molecules have a 
+   strong preference for binding 9mers.
+   The prediction  values are  given in half life time in hours values and as 
+   %-Rank to a set of 200.000 random natural peptides.
+   The NetMHCstabpan  method is described in detail in the following article:
+
+   Pan-specific  prediction  of peptide-MHC-I  complex stability; a correlate 
+   of T cell immunogenicity.
+   Michael Rasmussen, Emilio Fenoy, Mikkel Harndahl, Anne Bregnballe 
+   Kristensen, Ida Kallehauge Nielsen, Morten Nielsen and Soren Buus
+   Accepted Journal of Immunology, June, 2016.
+
+   NetMHCpan is described separately in the article:
+
+   NetMHCpan, a Method for Quantitative Predictions of Peptide Binding to Any
+   HLA-A and -B Locus Protein of Known Sequence.
+   Nielsen M, et al.
+   PLoS ONE 2(8): e796. doi:10.1371/journal.pone.0000796, 2007.
+
+   More information about the NetMHCstabpan method can be found at:
+ 
+     	https://services.healthtech.dtu.dk/services/NetMHCstabpan-1.0/
+
+
+   DOWNLOAD
+   
+   The  NetMHCstabpan  1.0  software  package  is  a  property  of Center for 
+   Biological  Sequence  Analysis.  It  may  be  downloaded  only  by special 
+   agreement. For academic users there is a download site at:
+
+        https://services.healthtech.dtu.dk/services/NetMHCstabpan-1.0/ (download tab)
+
+   Other users are requested to contact health-software@dtu.dk
+
+
+   PRE-INSTALLATION
+
+   NetMHCstabpan  1.0  currently  runs  under  Linux and Darwin (MacOSX). The 
+   package consists of two files:
+  
+      netMHCstabpan-1.0.readme	this file
+      netMHCstabpan-1.0.tar.gz	gzip'ed TAR archive
+
+   After installation the software will occupy  less than 100 MB of diskspace.
+
+   In  addition,  NetMHCstabpan  1.0  depends  on the NetMHCpan-2.8 
+   sofware for combined predictions.  If this software is not on the  system  
+   already it will  have  to  be  installed  before installing NetMHCstabpan.
+   For academic users the download point are:
+
+      https://services.healthtech.dtu.dk/services/NetMHCpan-2.8/ (download tab, version 2.8a)
+
+   Other users can obtain the softwares by writing to health-software@dtu.dk.
+
+
+   INSTALLATION
+
+   1. Uncompress and untar the package:
+
+      gunzip -c netMHCstabpan-1.0a.Linux.tar.gz | tar xvf -
+
+      This should produce a directory 'netMHCstabpan-1.0'.
+
+   2. From the DTU Heatthtech WWW site download the file:
+
+      https://services.healthtech.dtu.dk/services/NetMHCstabpan-1.0//data.tar.gz
+
+      It should be 6843078 Mb.  Put it in the 'netMHCstabpan-1.0' 
+      directory and then gunzip and untar it:
+      
+      gunzip -c data.tar.gz | tar xvf -
+
+      This will produce a directory 'data' (~42MB).  It is necessary  for the
+      NetMHCstabpan 1.0  software to operate;  once it has been installed you 
+      may delete the 'data.tar.gz' file; it will not be needed.
+
+   3. In the 'netMHCstabpan-1.0' directory edit the script 'netMHCstabpan':
+   
+      a. At the top of the file  locate the part labelled  "GENERAL SETTINGS:
+         CUSTOMIZE TO YOUR SITE"  and set  the 'NMHOME' variable  to the full
+	 path to the 'netMHCstabpan-1.0' directory on your system;
+
+      b. Set the variables  NETMHCpan_env to the full paths on your system to 
+         the NetMHCpan 2.8 executable.
+
+      c. If the variable TMPDIR is not set by default on your system you need
+         to set it to the full path to the tmp directory of your choice (must
+         be user writable with the sticky bit set, typically '/var/tmp');
+
+   4. In 'netMHCstabpan-1.0/test' test the software by executing the commands
+      listed  in  the  file  'comm'.  The resulting ".myout" files should not 
+      differ  from the corresponding  ".out"  files   provided in the package  
+      other than in the directory names and rounding errors.
+
+   5. Finish the installation:
+
+      a. Copy  or  link  the  'netMHCstabpan'  script to any directory in the 
+         users' path on your syste.
+
+      b. Copy the 'netMHCstabpan.1' file to a location in your manual system.
+         If you need a compiled version try running:
+
+         man -d netMHCstabpan.1 | compress >netMHCstabpan.Z
+
+         or:
+
+         neqn netMHCstabpan.1 | tbl| nroff -man| col| compress > netMHCstabpan.Z
+
+
+   PROBLEMS
+
+   Contact packages@cbs.dtu.dk in case of problems.
+   
+   Questions on the scientific aspects of the NetMHCstabpan 1.0 method should
+   be sent to dr Morten Nielsen, mniel@cbs.dtu.dk.
+
+
