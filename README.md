@@ -22,10 +22,10 @@ python train.py -t bert -r results/temp -m models/temp -p pre_trained_models/esm
 ## Making Predictions
 
 For making predictions, run predict.py. Additionally you need to provide:
-- Trained model
+- Trained model (https://drive.google.com/file/d/1k2lCBBqgyCZ6JNZ4dT6TwDgXbsOyYQ_s/view?usp=sharing).
 - Imput: csv with peptide and mhc sequences (dataset/hlab/test.csv is a example)
 - Output: output csv
-- Pretrained model: this is use for the tokenizer
+- Pretrained model: this is use for the tokenizer. The default pretrained model is: esm2_t6_8M_UR50D  (https://huggingface.co/facebook/esm2_t36_3B_UR50D)
 
 
 ```
