@@ -29,6 +29,7 @@ plt.ylabel('Num. samples')
 plt.xticks(ind+width, samples[:, 0] )
 plt.legend( (bar1, bar2, bar3), ('Training', 'Validation', 'Testing') )
 #plt.show()
-plt.savefig("dataset_samples.png", dpi=300, bbox_inches='tight')
+#plt.savefig("dataset_samples.png", dpi=300, bbox_inches='tight')
 
+plt.savefig('dataset_samples.eps', format='eps', bbox_inches='tight')
 
