@@ -15,4 +15,19 @@ Main Requeriments:
 
 In order to train the models you need to run the command: 
 
+```
+python train.py -t bert -r results/temp -m models/temp -p pre_trained_models/esm2_t6_8M_UR50D
+```
+
 ## Making Predictions
+
+For making predictions, run predict.py. Additionally you need to provide:
+- Trained model
+- Imput: csv with peptide and mhc sequences (dataset/hlab/test.csv is a example)
+- Output: output csv
+- Pretrained model: this is use for the tokenizer
+
+
+```
+python predict.py -m results/train_esm2_t6_rnn_freeze_30epochs/checkpoint-202134 -i dataset/hlab/test.csv -o predictions_output.csv -p pre_trained_models/esm2_t6_8M_UR50D
+```

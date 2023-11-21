@@ -28,13 +28,13 @@ parser = argparse.ArgumentParser(prog='pMHC')
 parser.add_argument('-t', '--type', default='bert', help='Model type: tape or bert')     
 parser.add_argument('-r', '--results', default='results/tmp/', help='Path to store results')  
 parser.add_argument('-m', '--models', default='models/tmp/', help='Path to store models')  
-parser.add_argument('-p', '--pretrainned', default='pre_trained_models/esm2_t6_8M_UR50D', help='Pretrained model path')  
+parser.add_argument('-p', '--pretrained', default='pre_trained_models/esm2_t6_8M_UR50D', help='Pretrained model path')  
 
 args = parser.parse_args()
 model_type      = args.type
 path_results    = args.results
 path_model      = args.models
-model_name      = args.pretrainned
+model_name      = args.pretrained
 
 print("Training :", model_type, path_results, path_model, model_name)
 
