@@ -22,28 +22,33 @@ set_seed(42)
 #set_seed(1)
 
 import sys
+import argparse
 
+parser = argparse.ArgumentParser(prog='pMHC')
+parser.add_argument('-t', '--type', default='bert', help='Model type: tape or bert')     
+parser.add_argument('-r', '--results', default='results/tmp/', help='Path to store results')  
+parser.add_argument('-m', '--models', default='models/tmp/', help='Path to store models')  
+parser.add_argument('-p', '--pretrainned', default='pre_trained_models/esm2_t6_8M_UR50D', help='Pretrained model path')  
 
+args = parser.parse_args()
+model_type      = args.type
+path_results    = args.results
+path_model      = args.models
+model_name      = args.pretrainned
 
+print("Training :", model_type, path_results, path_model, model_name)
 
-
-        
-
+# dataset
 path_train_csv = "dataset/hlab/hlab_train.csv"
 path_val_csv = "dataset/hlab/hlab_val.csv"
-#path_train_csv = "dataset/hlab/hlab_train_micro.csv"
-#path_val_csv = "dataset/hlab/hlab_val_micro.csv"
-
-#path_train_csv = "dataset/netMHCIIpan3.2/train_micro.csv"
-#path_val_csv = "dataset/netMHCIIpan3.2/eval_micro.csv"
 
 #################################################################################
 #################################################################################
-# Especificar si usaremos tape o bert
+# MODEL TYPE: bert or tape
 #model_type = "tape"
-model_type = "bert" # EM1, ESM2, PortBert
+#model_type = "bert" # EM1, ESM2, PortBert
 
-# especificar donde se guadra los modlos y resultados
+# PATH FOR RESULTS AND MODELS
 #path_results    = "results/train_protbert_bfd_rnn/" 
 #path_model      = "models/train_protbert_bfd_rnn/"
 #path_results    = "results/train_esm2_t6_rnn_30_epochs/" 
@@ -56,40 +61,34 @@ model_type = "bert" # EM1, ESM2, PortBert
 #path_model      = "models/train_esm2_t30_rnn12/"
 #path_results    = "results/train_esm2_t33_rnn_freeze_acc_steps/" 
 #path_model      = "models/train_esm2_t33_rnn_freeze_acc_steps/"
-path_results    = "results/tmp/" 
-path_model      = "models/tmp/"
-
-
 #path_results    = "results/train_esm2_t6_rnn2/" # con trainner plot gradients, todo bien :) 
 #path_model      = "models/train_esm2_t6_rnn2/"
 
 
-# el modelo preentrenado
-#model_name = "bert-base"   # TAPE                   # train 1, 2, 3, 4
-model_name = "pre_trained_models/esm2_t6_8M_UR50D"          # train 1, 2, 3, 4
+# PRETRAINED MODELS
+#model_name = "bert-base"   # TAPE                   
+#model_name = "pre_trained_models/esm2_t6_8M_UR50D"         
 #model_name = "pre_trained_models/esm2_t12_35M_UR50D" 
 #model_name = "pre_trained_models/esm2_t30_150M_UR50D"
-#model_name = "pre_trained_models/esm2_t33_650M_UR50D"       # 
+#model_name = "pre_trained_models/esm2_t33_650M_UR50D"       
 #model_name = "pre_trained_models/prot_bert_bfd"
 #################################################################################
 #################################################################################
 
 max_length = 50 # for hlab dataset
-#max_length = 73 # for netpanmhcii3.2 dataset
+#max_length = 73 # for netpanmhcii3.2 dataset La longitus del mhc es 34 => 34 + 37 + 2= 73  
 
-if model_type == "tape":
-    # read with TAPE tokenizer, la longitus del mhc es 34 => 34 + 37 + 2= 73    
-    trainset = DataSetLoaderTAPE(path_train_csv, max_length=max_length) # el paper usa max_peptide_lenght = 24
+if model_type == "tape":  
+    trainset = DataSetLoaderTAPE(path_train_csv, max_length=max_length) 
     valset = DataSetLoaderTAPE(path_val_csv, max_length=max_length)
     config = ProteinBertConfig.from_pretrained(model_name, num_labels=2)
     
-else:
-    # read with ESM tokenizer    
+else: 
     trainset = DataSetLoaderBERT(path=path_train_csv, tokenizer_name=model_name, max_length=max_length)
-    valset = DataSetLoaderBERT(path=path_val_csv, tokenizer_name=model_name, max_length=max_length)
-    #trainset = DataSetLoaderBERT_old(path=path_train_csv, tokenizer_name=model_name, max_length=max_length)
-    #valset = DataSetLoaderBERT_old(path=path_val_csv, tokenizer_name=model_name, max_length=max_length)    
+    valset = DataSetLoaderBERT(path=path_val_csv, tokenizer_name=model_name, max_length=max_length)    
     config = BertConfig.from_pretrained(model_name, num_labels=2)
+
+
 
 config.rnn = "lstm"
 config.num_rnn_layer = 2
@@ -101,20 +100,18 @@ config.cnn_dropout = 0.1
 
 #################################################################################
 #################################################################################
-#model_ = TapeLinear.from_pretrained(model_name, config=config)
-#model_ = TapeRnn.from_pretrained(model_name, config=config)
-#model_ = TapeRnnAtt.from_pretrained(model_name, config=config)
-#model_ = BertLinear.from_pretrained(model_name, config=config)
-model_ = BertRnn.from_pretrained(model_name, config=config)
-#model_ = BertRnnSigmoid.from_pretrained(model_name, config=config)
+if model_type == "tape":    
+    model_ = TapeRnn.from_pretrained(model_name, config=config)
+else:                       
+    model_ = BertRnn.from_pretrained(model_name, config=config)
 
-# freeze bert layers
-for param in model_.bert.parameters():
-    param.requires_grad = False
+
+# FREEZE BERT LAYERS
+#for param in model_.bert.parameters():
+#    param.requires_grad = False
     
 #################################################################################
 #################################################################################
-
 
 #dataset = DataLoader(trainset)
 #iterator = iter(dataset)
@@ -122,14 +119,13 @@ for param in model_.bert.parameters():
 #print(next(iterator))
 #print(trainset[0]['input_ids'].shape)
 
-#sys.exit()
-
 ############ hyperparameters ####################################################
 
 num_samples = len(trainset)
 num_epochs = 3
 batch_size = 16  # segun hlab, se obtienen mejoes resutlados
 num_training_steps = num_epochs * num_samples
+
 
 training_args = TrainingArguments(
         output_dir                  = path_results, 
@@ -157,11 +153,12 @@ training_args = TrainingArguments(
 
     )
 
+
 # hiperparameters BERTMHC, uso SGD with momentum, ademas uso escheduler
-lr = 0.15  # con este learning rate, no converge y genera Nan
+#lr = 0.15  # con este learning rate, no converge y genera Nan
 weight_decay = 0.0001
 momentum = 0.9
-warmup_steps = 0
+#warmup_steps = 0
 
 # hiperparameters HLAB, uso AdamW (en teoria es mejor de SGD with momentum)
 lr = 5e-5  #-> este se uso en todos los experimentos
