@@ -105,7 +105,7 @@ if model_type == "tape":
 else:                       
     model_ = BertRnn.from_pretrained(model_name, config=config)
 
-
+print(model_)
 # FREEZE BERT LAYERS
 #for param in model_.bert.parameters():
 #    param.requires_grad = False
